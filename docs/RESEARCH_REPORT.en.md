@@ -18,6 +18,7 @@
    - **Experiment 2:** Expansion across **8 distinct information categories (24 sub-items)** covering diverse real-world hallucination traps.
    - **Experiment 3:** Generalization to all core models available in the **Google AI Pro** plan (`Gemini 3.8 Flash`, `Gemini 4 Hydrogen`, `Gemini 4 Neon`, `Gemini 4 Argon`; excluding Ultra-only `Carbon`), mapping each model's optimal workload and characteristic failure modes to tailored `GEMINI.md` profiles.
    - **Experiment 4:** Automated programmatic fact-checking of every reference path, line number range (`#Lstart-Lend`), and semantic keyword using Python (`scripts/fact_check_references.py`).
+   - **Phase 4 (Forward-Compatibility Architecture):** Engineered the **Generation-Agnostic Model-Lineage & Dynamic Spec Override Protocol (`GEMINI.md` Section III)** to ensure seamless compatibility when `Gemini 3.8 Flash` upgrades to newer Flash versions or when `Gemini 4` transitions to `Gemini 5` (`gemini-5-*`).
 
 ---
 

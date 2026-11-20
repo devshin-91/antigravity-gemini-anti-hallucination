@@ -18,6 +18,7 @@
    - **Experiment 2:** 일반적 질문을 넘어 최대한 다양한 **8가지 정보 종류(24개 세부 검증 문항)**로 범위를 넓혀 재검증.
    - **Experiment 3:** 효과가 검증된 환각 제어 아키텍처를 Google AI Pro 플랜의 모든 가용 주력 모델(`3.8 Flash`, `4 Hydrogen`, `4 Neon`, `4 Argon`)로 확장하여 모델별 최적 태스크와 고유 환각 유형을 정의하고 맞춤형 A/B 테스트 수행.
    - **Experiment 4:** 규칙 및 보고서에 인용된 모든 참고 문서(리퍼런스)가 실제 파일 및 라인 번호와 일치하는지 Python 자동화 스크립트로 팩트 체크 수행.
+   - **Phase 4 (Forward-Compatibility Architecture):** 향후 `Gemini 3.8 Flash → 상위 버전 Flash` 또는 `Gemini 4 → Gemini 5` 세대 교체 시에도 규칙 노후화 없이 호환되도록 **계보(Lineage) 와일드카드 승계 및 동적 스펙 오버라이드 프로토콜(`GEMINI.md` 섹션 III)** 설계.
 
 ---
 
