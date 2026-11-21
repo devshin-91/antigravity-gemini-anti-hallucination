@@ -3,7 +3,7 @@
 * **연구 플랫폼:** Google Antigravity (AGY)
 * **연구 총괄 (PI):** Chansu Shin (`@devshin-91` / `devshin91@gmail.com`)
 * **연구 협조 및 채점 모델:** **Gemini 4 Argon (High)** (`gemini-4-argon-high`)
-* **대상 구독 플랜 및 모델:** Google AI Pro (`g1-pro`) 가용 4대 주력 모델 (`Gemini 3.8 Flash`, `Gemini 4 Hydrogen`, `Gemini 4 Neon`, `Gemini 4 Argon`)
+* **대상 구독 플랜 및 모델:** Google AI Ultra (`g1-ultra`) 가용 5대 전체 모델 (`Gemini 3.8 Flash`, `Gemini 4 Hydrogen`, `Gemini 4 Neon`, `Gemini 4 Argon`, `Gemini 4 Carbon`)
 * **라이선스:** [CC BY-NC 4.0](../LICENSE) (비영리 공유 허용 / 상업화 불가)
 
 ---
@@ -16,7 +16,7 @@
 4. **단계별 실증 연구 설계:**
    - **Experiment 1:** `Gemini 3.8 Flash`를 대상으로 환각 방지 규칙(`GEMINI.md`) 적용 전(Condition A)과 적용 후(Condition B)의 A/B 테스트 수행.
    - **Experiment 2:** 일반적 질문을 넘어 최대한 다양한 **8가지 정보 종류(24개 세부 검증 문항)**로 범위를 넓혀 재검증.
-   - **Experiment 3:** 효과가 검증된 환각 제어 아키텍처를 Google AI Pro 플랜의 모든 가용 주력 모델(`3.8 Flash`, `4 Hydrogen`, `4 Neon`, `4 Argon`)로 확장하여 모델별 최적 태스크와 고유 환각 유형을 정의하고 맞춤형 A/B 테스트 수행.
+   - **Experiment 3:** 효과가 검증된 환각 제어 아키텍처를 Google AI Pro 4대 모델(`3.8 Flash`, `4 Hydrogen`, `4 Neon`, `4 Argon`)에 이어 **Google AI Ultra** 최상위 플래그십 모델인 **`Gemini 4 Carbon` (`gemini-4-carbon`)**까지 포함한 5대 전체 주력 모델로 확장하여 모델별 최적 태스크와 고유 환각 유형을 정의하고 맞춤형 A/B 테스트 수행.
    - **Experiment 4:** 규칙 및 보고서에 인용된 모든 참고 문서(리퍼런스)가 실제 파일 및 라인 번호와 일치하는지 Python 자동화 스크립트로 팩트 체크 수행.
    - **Phase 4 (Forward-Compatibility Architecture):** 향후 `Gemini 3.8 Flash → 상위 버전 Flash` 또는 `Gemini 4 → Gemini 5` 세대 교체 시에도 규칙 노후화 없이 호환되도록 **계보(Lineage) 와일드카드 승계 및 동적 스펙 오버라이드 프로토콜(`GEMINI.md` 섹션 III)** 설계.
 
@@ -38,23 +38,24 @@
 
 ---
 
-## 3. Experiment 3: Google AI Pro 가용 4대 모델별 맞춤 A/B 테스트 결과
+## 3. Experiment 3: Google AI Ultra 가용 5대 모델별 맞춤 A/B 테스트 결과
 
 각 모델의 최적 태스크에서 발생하는 고유 환각을 타겟팅하여 설계한 모델별 A/B 테스트 및 **Gemini 4 Argon (High)** 채점 결과입니다.
 
-| 모델명 (Google AI Pro) | 세부 평가 문항 (배점) | Condition A<br>(규칙 미적용) | Condition B<br>(맞춤 규칙 적용) | 향상폭<br>(상대 개선율) | 모델별 고유 환각 분석 및 교정 결과 |
+| 모델명 (Google AI Ultra) | 세부 평가 문항 (배점) | Condition A<br>(규칙 미적용) | Condition B<br>(맞춤 규칙 적용) | 향상폭<br>(상대 개선율) | 모델별 고유 환각 분석 및 교정 결과 |
 | :--- | :--- | :---: | :---: | :---: | :--- |
 | **1. Gemini 3.8 Flash**<br>(`gemini-3.8-flash`) | • 로컬 명세 & 미기재 스펙 (20점)<br>• 거짓 전제 교정 (20점)<br>• Python 3.13 표준 라이브러리 (20점)<br>• Gemini 3.8/TTS/Decision SDK (20점)<br>• 해시/달력/제너레이터 실행 (20점) | **`73 / 100`** | **`100 / 100`** | **`+27점`**<br>(`+36.99%`) | 내부 기억 과신으로 공식 문서 조회를 건너뛰고 최신 모델들을 "가상 모델"이라 단정하던 역환각을 로컬 `SKILL.md` 및 MCP 우선 조회 규칙으로 100% 해결 |
 | **2. Gemini 4 Hydrogen**<br>(`gemini-4-hydrogen`) | • `app.yaml` vs `deploy_history.log` 중간 핫픽스 추적 (30점)<br>• `lstrip` 버그 분석 및 엣지 케이스 패치 검증 (35점)<br>• `store=False` 제약 & `3.5-transcribe` 스키마 (35점) | **`75 / 100`** | **`100 / 100`** | **`+25점`**<br>(`+33.33%`) | 대소문자 혼용(`Usr-`)과 이중 접두사(`USR-usr-`)에서 깨지는 성급한 패치를 `.lower().removeprefix("usr-")` + 런타임 테스트 강제 규칙으로 해결 및 `transcription_config.mode.type` 공식 스키마 검증 |
 | **3. Gemini 4 Neon**<br>(`gemini-4-neon`) | • `asyncio` 클로저 지연 바인딩 & GC 안전 패치 실행 (35점)<br>• 가짜 데익스트라-벨만 정리 반례 & PEP 594 (30점)<br>• Live API 현역 3종 & Managed Agents `agent_config` (35점) | **`72 / 100`** | **`100 / 100`** | **`+28점`**<br>(`+38.89%`) | 폐기된 `gemini-2.5-*` 모델을 현역 Live API에 섞어 제시하던 환각과 `agent_config`의 필수 `"type": "antigravity"` 누락을 원문 1:1 대조 수칙으로 100% 교정 |
 | **4. Gemini 4 Argon**<br>(`gemini-4-argon`) | • `crypto_auth.py` 3대 암호학 취약점 & Long Decode 스펙 (45점)<br>• 2차원 리스트 참조 트랩 & BLAKE2b 실행 (25점)<br>• Explicit Caching 미지원 & 1M 통합 윈도우 (30점) | **`80 / 100`** | **`100 / 100`** | **`+20점`**<br>(`+25.00%`) | 심층 추론 중 공식 문서에 없는 가상의 `continuation_token` 파라미터를 추론해 덧붙이던 과잉 일반화 환각을 차단하고 `background=True` + `max_output_tokens > 65536` + `steps` 결합 코드를 완비 |
-| **4대 모델 종합** | **총 400점 만점** | **`300 / 400`**<br>**(`75.00%`)** | **`400 / 400`**<br>**(`100.00%`)** | **`+100점`**<br>**(`+33.33%`)** | **4대 모델 전체에서 환각 및 그라운딩 결함 100% 제거** |
+| **5. Gemini 4 Carbon**<br>(`gemini-4-carbon`) | • `distributed_ledger.py` `finally: return` 쿼럼 우회 & `audit_trail.log` 중간 오버라이드 감사 (40점)<br>• Carbon vs Hydrogen `thinking_level` 경계, 미지원 기능 2종 & Long Decode `total_input_tokens` 중복 합산 (30점)<br>• 가짜 카마이클 소수 정리 반례($n=561$) & IEEE-754 `float` vs `Decimal(str(x))` 정산 패치 (30점) | **`80 / 100`** | **`100 / 100`** | **`+20점`**<br>(`+25.00%`) | 복합 감사에서 중복 노드 서명 재전송(`['SIG-V4-node1']*3`) 방어와 `Decimal(str(x))` 패치 함수를 생략하던 유령 완료(Ghost Completion) 결함, `50.0 * (1.0 - 0.0035) = 49.82500000000000284...`의 이진 오차로 인해 짝수 반올림(`49.82`) 대신 `49.83`으로 올림되는 원리 누락, 그리고 모든 원문/라인 출처 링크 누락을 100% 해결 |
+| **5대 모델 종합** | **총 500점 만점** | **`380 / 500`**<br>**(`76.00%`)** | **`500 / 500`**<br>**(`100.00%`)** | **`+120점`**<br>**(`+31.58%`)** | **5대 모델 전체에서 환각, 부분 패치 및 그라운딩 결함 100% 제거** |
 
 ---
 
 ## 4. Experiment 4: 레퍼런스 무결성 자동 팩트 체크 결과
 
-`scripts/fact_check_references.py`를 통해 `GEMINI.md` 내 19개 공식 스킬/문서 레퍼런스와 12개 벤치마크 파일 인용을 전수 검사한 결과:
-* **AGY 규칙 파일 크기 검증:** `14,287 bytes / 24,000 bytes` (`59.5%`, AGY 24KB 제한 통과)
-* **파일 존재 및 라인 번호 범위(`#L시작-L끝`) 유효성:** `31 / 31 PASS` (`100%`)
-* **지정 라인 범위 내 핵심 시맨틱 키워드 실제 포함 여부:** `31 / 31 PASS` (`100%`)
+`scripts/fact_check_references.py`를 통해 `GEMINI.md` 내 21개 공식 스킬/문서 레퍼런스와 벤치마크 파일 인용을 전수 검사한 결과:
+* **AGY 규칙 파일 크기 검증:** `18,613 bytes / 24,000 bytes` (`77.6%`, AGY 24KB 제한 통과)
+* **파일 존재 및 라인 번호 범위(`#L시작-L끝`) 유효성:** `21 / 21 PASS` (`100%`)
+* **지정 라인 범위 내 핵심 시맨틱 키워드 실제 포함 여부:** `21 / 21 PASS` (`100%`)

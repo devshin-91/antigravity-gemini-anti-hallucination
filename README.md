@@ -1,11 +1,11 @@
 <div align="center">
 
 # 🛡️ Antigravity Gemini Anti-Hallucination Framework
-### Empirical Anti-Hallucination Guardrails & A/B Benchmark Suite for Gemini 3.8 Flash & Gemini 4 Series (Hydrogen · Neon · Argon) on Google Antigravity
+### Empirical Anti-Hallucination Guardrails & A/B Benchmark Suite for Gemini 3.8 Flash & Gemini 4 Full Roster (Hydrogen · Neon · Argon · Carbon) on Google Antigravity
 
 [![Platform](https://img.shields.io/badge/Platform-Google%20Antigravity%20(AGY)-4285F4?style=for-the-badge&logo=google)](https://antigravity.google/docs)
 [![Research Partner](https://img.shields.io/badge/Co--Research%20Model-Gemini%204%20Argon%20(High)-8E24AA?style=for-the-badge)](https://aistudio.google.com/docs/latest-model.md)
-[![Target Models](https://img.shields.io/badge/Models-Gemini%203.8%20Flash%20%7C%204%20Hydrogen%20%7C%204%20Neon%20%7C%204%20Argon-0F9D58?style=for-the-badge)](https://aistudio.google.com/docs/pricing)
+[![Target Models](https://img.shields.io/badge/Models-Gemini%203.8%20Flash%20%7C%204%20Hydrogen%20%7C%204%20Neon%20%7C%204%20Argon%20%7C%204%20Carbon-0F9D58?style=for-the-badge)](https://aistudio.google.com/docs/pricing)
 [![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0%20(Non--Commercial)-F4B400?style=for-the-badge)](./LICENSE)
 [![Repository Visibility](https://img.shields.io/badge/Repository-Private%20Research-333333?style=for-the-badge)]()
 
@@ -16,8 +16,8 @@
 ---
 
 > 📌 **GitHub Sidebar ("About") Metadata (For Top-Right Repository Sidebar)**
-> - **Description (About):** `[Antigravity Research] Empirical anti-hallucination guardrails & A/B benchmark suite for Gemini 3.8 Flash and Gemini 4 (Hydrogen, Neon, Argon) on Google Antigravity, co-researched with Gemini 4 Argon (High).`
-> - **Topics (Tags):** `antigravity` `google-antigravity` `gemini-4-argon` `gemini-3-8-flash` `gemini-4-hydrogen` `gemini-4-neon` `anti-hallucination` `llm-grounding` `ab-testing`
+> - **Description (About):** `[Antigravity Research] Empirical anti-hallucination guardrails & A/B benchmark suite for Gemini 3.8 Flash and Gemini 4 (Hydrogen, Neon, Argon, Carbon) on Google Antigravity, co-researched with Gemini 4 Argon (High).`
+> - **Topics (Tags):** `antigravity` `google-antigravity` `gemini-4-argon` `gemini-4-carbon` `gemini-3-8-flash` `gemini-4-hydrogen` `gemini-4-neon` `anti-hallucination` `llm-grounding` `ab-testing`
 
 ---
 
@@ -34,8 +34,8 @@ By cross-referencing the official **[Gemini Developer API Pricing & Model Specif
 1. **Core Hypothesis:** According to official specifications, `Gemini 3.8 Flash` is specifically engineered for *"long-horizon software engineering, autonomous agents, and complex enterprise workflows."* Its baseline failures are not due to a lack of reasoning capacity, but rather **a tendency to skip tool verification when internal parametric confidence is high**. If we systematically eliminate these hallucinations, Gemini 3.8 Flash becomes an extraordinarily cost-effective, high-speed workhorse.
 2. **Phase 1 (Gemini 3.8 Flash Initial A/B Test):** We designed a global anti-hallucination rule architecture (`GEMINI.md`) for **Google Antigravity (AGY)** and conducted a controlled A/B test (`Condition A: Without rules` vs. `Condition B: With rules`). Accuracy jumped from **`73/100 to 100/100 (+36.99%)`**, eliminating 100% of factual and reverse hallucinations.
 3. **Phase 2 (8-Category Information Stress Test):** Rather than testing only simple cases, we expanded the benchmark across **8 distinct information domains (24 sub-tasks: language version deltas, bleeding-edge AI SDKs, multimodal constraints, legacy vs. production doc conflicts, financial/contract audits, RFC standards & fake academic papers, cybersecurity CVEs & code audits, and Unicode/IEEE-754 precision computation)**. Condition B achieved **`160/160 (100.00%)` vs. Condition A's `116/160 (72.50%)` (`+37.93%` improvement)**.
-4. **Phase 3 (Generalization Across All Google AI Pro Models):** Having proven the methodology on Gemini 3.8 Flash, we expanded the framework to every core Gemini model available under the **Google AI Pro** subscription plan inside Antigravity: **`Gemini 3.8 Flash`**, **`Gemini 4 Hydrogen`**, **`Gemini 4 Neon`**, and **`Gemini 4 Argon`**. *(Note: `Gemini 4 Carbon` is excluded both because it is reserved for the Google AI Ultra plan and because it serves as the top-end heavyweight model).*
-5. **Phase 4 (Forward-Compatibility & Next-Generation Upgrade Architecture):** To guarantee that our global rules remain compatible when `Gemini 3.8 Flash` upgrades to higher versions (`3.9`, `4.x`, `5.x Flash`) or when `Gemini 4` transitions to `Gemini 5` (`gemini-5-*`) and new chemical-element models without causing rule obsolescence, we engineered a **Generation-Agnostic Forward-Compatibility Protocol** featuring: (1) Wildcard Model-Lineage Archetypes (`gemini-*-flash*`, `gemini-*-hydrogen*`, `gemini-*-neon*`, `gemini-*-argon*`), (2) Dynamic Generation Precedence (never force-downgrading newer generations), (3) Live Official Spec Override over baseline numbers, (4) Sliding Deprecation Windows, and (5) Dynamic Line-Number Re-Verification across plugin updates.
+4. **Phase 3 (Generalization Across All Google AI Pro & Ultra Models — Including `Gemini 4 Carbon`):** Having proven the methodology on Gemini 3.8 Flash, we initially expanded the framework across all 4 core models available under **Google AI Pro** (`Gemini 3.8 Flash`, `Gemini 4 Hydrogen`, `Gemini 4 Neon`, `Gemini 4 Argon`), and upon upgrading to **Google AI Ultra**, extended the architecture and A/B benchmark to the flagship **`Gemini 4 Carbon` (`gemini-4-carbon` & `Orchestrator (Carbon)`)**, completing the full 5-model roster.
+5. **Phase 4 (Forward-Compatibility & Next-Generation Upgrade Architecture):** To guarantee that our global rules remain compatible when `Gemini 3.8 Flash` upgrades to higher versions (`3.9`, `4.x`, `5.x Flash`) or when `Gemini 4` transitions to `Gemini 5` (`gemini-5-*`) and new chemical-element models without causing rule obsolescence, we engineered a **Generation-Agnostic Forward-Compatibility Protocol** featuring: (1) Wildcard Model-Lineage Archetypes (`gemini-*-flash*`, `gemini-*-hydrogen*`, `gemini-*-neon*`, `gemini-*-argon*`, `gemini-*-carbon*`), (2) Dynamic Generation Precedence (never force-downgrading newer generations), (3) Live Official Spec Override over baseline numbers, (4) Sliding Deprecation Windows, and (5) Dynamic Line-Number Re-Verification across plugin updates.
 6. **Phase 5 (Zero-Prompt, Low-Token Automated Reference Fact-Checking):** Manual fact-checking prompts incur high token/step overhead (`43 LLM responses / 68 tool calls` observed in `morning-waking-paper` steps `463–542`), while unprompted edits miss errors. We engineered a **Tier 0–2 Verification Engine (`src/ref_factcheck/`)** and an **AGY Lifecycle Hook Plugin (`plugins/ref-fact-checker/`)** and evaluated them across a 4-axis benchmark ([Phase 5 Research Report](./docs/PHASE5_REFERENCE_FACTCHECK_REPORT.en.md)).
 
 ---
@@ -54,15 +54,16 @@ By cross-referencing the official **[Gemini Developer API Pricing & Model Specif
 
 ## 2. Key Findings: Hallucinations Don't Disappear in Larger Models — They Change Shape
 
-Through controlled A/B experiments evaluated by **Gemini 4 Argon (High)**, we discovered that each model tier exhibits its own **characteristic hallucination failure mode** tied to its primary workload:
+Through controlled A/B experiments across the full **Google AI Ultra 5-Model Roster** evaluated by **Gemini 4 Argon (High)**, we discovered that even the flagship `Gemini 4 Carbon` exhibits characteristic failure modes when unguarded:
 
-| Model (Google AI Pro) | Optimal Workload | Characteristic Hallucination in Condition A (Unguarded) | A/B Score Improvement (Condition A → B) |
+| Model (Google AI Ultra) | Optimal Workload | Characteristic Hallucination in Condition A (Unguarded) | A/B Score Improvement (Condition A → B) |
 | :--- | :--- | :--- | :---: |
 | **Gemini 3.8 Flash**<br>(`gemini-3.8-flash`) | High-speed data/doc pipelines, rapid scripting, lightweight agent loops | **Parametric Overconfidence & Reverse Hallucination:** Skips local MCP/Skill lookup and declares real 2026 models (`gemini-decision-1`, `3.8-flash-tts`) "fictional" or denies Python 3.13 `strict=True` support | `73 → 100`<br>**(`+36.99%`)** |
 | **Gemini 4 Hydrogen**<br>(`gemini-4-hydrogen`) | Fast interactive coding, batch tool execution, implementation worker | **Premature Patching & Edge-Case Omission:** Submits patches without testing mixed-case (`Usr-`) or repeated-prefix (`USR-usr-`) edge cases; guesses informal names (`"Smart Dictation"`) instead of exact API schemas | `75 → 100`<br>**(`+33.33%`)** |
 | **Gemini 4 Neon**<br>(`gemini-4-neon`) | Multi-file refactoring, async/concurrency debugging, STEM reasoning | **Legacy/Current API Mixing & Missing Discriminators:** Mixes deprecated `gemini-2.5-*` models into active Live API lists and omits required `"type": "antigravity"` discriminator in `agent_config` | `72 → 100`<br>**(`+38.89%`)** |
 | **Gemini 4 Argon**<br>(`gemini-4-argon`) | Frontier architecture design, cryptographic/security audit, 1M Long Decode | **Over-Rationalization in Deep Reasoning:** Invents plausible-sounding but non-existent SDK parameters (`continuation_token`) and omits co-required flags (`max_output_tokens > 65536` + joining `interaction.steps`) | `80 → 100`<br>**(`+25.00%`)** |
-| **Combined Total** | **Full-Stack Engineering & Research** | **100 points lost to model-specific hallucinations & missing line citations** | **`300 → 400`**<br>**(`+33.33%` / 100% defect elimination)** |
+| **Gemini 4 Carbon**<br>(`gemini-4-carbon`) | Multi-module root-cause debugging, enterprise security & financial ledger audit, `/swarm` orchestration | **Partial Patching (Ghost Completion) & IEEE-754 Tie-Break Misdiagnosis:** Finds the `finally: return` bug but leaves duplicate node signature replay (`['SIG-V4-node1']*3`) unpatched, omits the `Decimal(str(x))` settlement patch function entirely, misses why `50.0 * (1.0 - 0.0035) = 49.82500000000000284...` exceeds the half-even tie and rounds UP to `49.83`, and omits all verbatim quotes & `#L` links | `80 → 100`<br>**(`+25.00%`)** |
+| **5-Model Combined Total** | **Full-Stack Engineering & Frontier Research** | **120 points lost to model-specific hallucinations, partial patches & missing line citations** | **`380 → 500`**<br>**(`+31.58%` / 100% defect elimination)** |
 
 ---
 

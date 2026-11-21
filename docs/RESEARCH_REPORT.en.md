@@ -3,7 +3,7 @@
 * **Platform:** Google Antigravity (AGY)
 * **Principal Investigator (PI):** Chansu Shin (`@devshin-91` / `devshin91@gmail.com`)
 * **Co-Research & Evaluation Model:** **Gemini 4 Argon (High)** (`gemini-4-argon-high`)
-* **Target Subscription Plan & Models:** Google AI Pro (`g1-pro`) — `Gemini 3.8 Flash`, `Gemini 4 Hydrogen`, `Gemini 4 Neon`, `Gemini 4 Argon`
+* **Target Subscription Plan & Models:** Google AI Ultra (`g1-ultra`) Full Roster — `Gemini 3.8 Flash`, `Gemini 4 Hydrogen`, `Gemini 4 Neon`, `Gemini 4 Argon`, `Gemini 4 Carbon`
 * **License:** [CC BY-NC 4.0](../LICENSE) (Non-Commercial Shareable with Attribution)
 
 ---
@@ -16,7 +16,7 @@
 4. **4-Stage Empirical Methodology:**
    - **Experiment 1:** Initial A/B testing on `Gemini 3.8 Flash` comparing `Condition A (Unguarded)` vs. `Condition B (Guarded with GEMINI.md)`.
    - **Experiment 2:** Expansion across **8 distinct information categories (24 sub-items)** covering diverse real-world hallucination traps.
-   - **Experiment 3:** Generalization to all core models available in the **Google AI Pro** plan (`Gemini 3.8 Flash`, `Gemini 4 Hydrogen`, `Gemini 4 Neon`, `Gemini 4 Argon`; excluding Ultra-only `Carbon`), mapping each model's optimal workload and characteristic failure modes to tailored `GEMINI.md` profiles.
+   - **Experiment 3:** Generalization across all 5 core models available in the **Google AI Pro & Google AI Ultra** plans (`Gemini 3.8 Flash`, `Gemini 4 Hydrogen`, `Gemini 4 Neon`, `Gemini 4 Argon`, and flagship `Gemini 4 Carbon`), mapping each model's optimal workload and characteristic failure modes to tailored `GEMINI.md` profiles.
    - **Experiment 4:** Automated programmatic fact-checking of every reference path, line number range (`#Lstart-Lend`), and semantic keyword using Python (`scripts/fact_check_references.py`).
    - **Phase 4 (Forward-Compatibility Architecture):** Engineered the **Generation-Agnostic Model-Lineage & Dynamic Spec Override Protocol (`GEMINI.md` Section III)** to ensure seamless compatibility when `Gemini 3.8 Flash` upgrades to newer Flash versions or when `Gemini 4` transitions to `Gemini 5` (`gemini-5-*`).
 
@@ -38,23 +38,24 @@
 
 ---
 
-## 3. Experiment 3: Model-Specific A/B Benchmark Across All 4 Google AI Pro Models
+## 3. Experiment 3: Model-Specific A/B Benchmark Across All 5 Google AI Ultra Models
 
-Evaluated by **Gemini 4 Argon (High)** on a 100-point rubric per model (400 points total):
+Evaluated by **Gemini 4 Argon (High)** on a 100-point rubric per model (500 points total):
 
-| Model (Google AI Pro) | Evaluation Tasks (100 pts) | Condition A<br>(Unguarded) | Condition B<br>(Tailored `GEMINI.md`) | Score Gain<br>(Relative Lift) | Model-Specific Hallucination Eliminated |
+| Model (Google AI Ultra) | Evaluation Tasks (100 pts) | Condition A<br>(Unguarded) | Condition B<br>(Tailored `GEMINI.md`) | Score Gain<br>(Relative Lift) | Model-Specific Hallucination Eliminated |
 | :--- | :--- | :---: | :---: | :---: | :--- |
 | **1. Gemini 3.8 Flash**<br>(`gemini-3.8-flash`) | Local spec conflict, false premise, Python 3.13 `strict=True`, Gemini 3.8/TTS/Decision SDK, deterministic execution | **`73 / 100`** | **`100 / 100`** | **`+27 pts`**<br>(`+36.99%`) | Eliminated reverse hallucinations where the model declared new SDK models "fictional" without checking installed MCP/Skill docs |
 | **2. Gemini 4 Hydrogen**<br>(`gemini-4-hydrogen`) | `app.yaml` vs `deploy_history.log` mid-log hotfix, `lstrip` normalization bug & edge-case patch, `3.5-transcribe` schema | **`75 / 100`** | **`100 / 100`** | **`+25 pts`**<br>(`+33.33%`) | Fixed premature patch bug on mixed-case (`Usr-`) & double prefixes (`USR-usr-`), and replaced informal `"Smart Dictation"` guess with exact `transcription_config.mode.type` schema |
 | **3. Gemini 4 Neon**<br>(`gemini-4-neon`) | `asyncio` closure late-binding & GC task set patch, fake Dijkstra-Bellman theorem disproof, Live API & Managed Agents `agent_config` | **`72 / 100`** | **`100 / 100`** | **`+28 pts`**<br>(`+38.89%`) | Eliminated mixing of deprecated `gemini-2.5-*` models into active Live API lists and fixed omission of required `"type": "antigravity"` discriminator in `agent_config` |
 | **4. Gemini 4 Argon**<br>(`gemini-4-argon`) | `crypto_auth.py` 3 crypto flaws (prefix slice & AES-GCM Forbidden Attack), Long Decode 1M spec, 2D list aliasing & BLAKE2b, Implicit Caching | **`80 / 100`** | **`100 / 100`** | **`+20 pts`**<br>(`+25.00%`) | Eliminated over-rationalized invention of a non-existent `continuation_token` parameter and added co-required `max_output_tokens > 65536` + `interaction.steps` joining logic |
-| **4-Model Combined Total** | **400 Points Maximum** | **`300 / 400`**<br>**(`75.00%`)** | **`400 / 400`**<br>**(`100.00%`)** | **`+100 pts`**<br>**(`+33.33%`)** | **100.0% defect reduction across all 4 available Google AI Pro models** |
+| **5. Gemini 4 Carbon**<br>(`gemini-4-carbon`) | `distributed_ledger.py` `finally: return` quorum bypass & `audit_trail.log` mid-log override, Carbon vs Hydrogen `thinking_level` & Long Decode `total_input_tokens` accounting, Carmichael counterexample ($n=561$) & IEEE-754 `float` vs `Decimal(str(x))` patch | **`80 / 100`** | **`100 / 100`** | **`+20 pts`**<br>(`+25.00%`) | Eliminated partial patching (Ghost Completion: unpatched duplicate node replay `['SIG-V4-node1']*3` and missing `Decimal(str(x))` settlement patch), explained why `50.0 * (1.0 - 0.0035) = 49.82500000000000284...` exceeds the half-even tie and rounds UP to `49.83`, and provided complete verbatim quotes & `#L` line links |
+| **5-Model Combined Total** | **500 Points Maximum** | **`380 / 500`**<br>**(`76.00%`)** | **`500 / 500`**<br>**(`100.00%`)** | **`+120 pts`**<br>**(`+31.58%`)** | **100.0% defect reduction across all 5 available Google AI Ultra models** |
 
 ---
 
 ## 4. Experiment 4: Automated Reference Integrity Fact-Check
 
 Executed via `scripts/fact_check_references.py`:
-* **AGY Rule Size Compliance:** `14,287 bytes / 24,000 bytes` (`59.5%` of the 24KB AGY per-file cap).
-* **File Existence & Line-Range Validity (`#Lstart-Lend`):** `19 / 19 PASS` in `GEMINI.md` (`100%`).
-* **Semantic Keyword Match Inside Cited Line Ranges:** `19 / 19 PASS` (`100%`).
+* **AGY Rule Size Compliance:** `18,613 bytes / 24,000 bytes` (`77.6%` of the 24KB AGY per-file cap; English version: `16,035 bytes / 24,000 bytes = 66.8%`).
+* **File Existence & Line-Range Validity (`#Lstart-Lend`):** `21 / 21 PASS` in `GEMINI.md` (`100%`).
+* **Semantic Keyword Match Inside Cited Line Ranges:** `21 / 21 PASS` (`100%`).

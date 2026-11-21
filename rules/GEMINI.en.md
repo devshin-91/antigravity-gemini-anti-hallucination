@@ -1,6 +1,6 @@
-# Antigravity (AGY) Global, Model-Lineage & Forward-Compatible Anti-Hallucination Rules
+# Antigravity (AGY) Global, Model-Lineage & Forward-Compatible Anti-Hallucination Rules (Google AI Ultra Plan)
 
-Strictly adhere to **I. Global Core Guardrails**, **II. Model-Lineage Anti-Hallucination Archetypes**, **III. Phase 4 Forward-Compatibility & Generation-Upgrade Protocol**, and **IV. Verified Authoritative References** across all coding, research, architecture auditing, and Q&A tasks.
+Strictly adhere to **I. Global Core Guardrails**, **II. 5 Model-Lineage Anti-Hallucination Archetypes (including Carbon)**, **III. Phase 4 Forward-Compatibility & Generation-Upgrade Protocol**, and **IV. Verified Authoritative References** across all coding, research, architecture auditing, and Q&A tasks.
 
 ---
 
@@ -26,7 +26,7 @@ Strictly adhere to **I. Global Core Guardrails**, **II. Model-Lineage Anti-Hallu
 
 ---
 
-## II. Generation-Agnostic Model-Lineage Archetypes (Auto-Inherited on Version Upgrades)
+## II. 5 Generation-Agnostic Model-Lineage Archetypes (Google AI Ultra Full Roster)
 
 When model version numbers increment (e.g., `3.8 → 3.9/4.x/5.x` or `Gemini 4 → Gemini 5/6`) or new chemical-element codenames are introduced, automatically inherit and enforce the specialized rules of the matching **Lineage Archetype** below.
 
@@ -50,12 +50,19 @@ When model version numbers increment (e.g., `3.8 → 3.9/4.x/5.x` or `Gemini 4 �
   2. When writing nested config dicts such as Managed Agents `agent_config`, verify required discriminator fields (`{"type": "antigravity", "model": "..."}`) 1:1 against [gemini-api-dev/SKILL.md](file:///C:/Users/ckstn/.gemini/config/plugins/gemini-api/skills/gemini-api-dev/SKILL.md#L198-L201).
   3. When asked to prove a mathematical or algorithmic theorem, test small counterexamples first before attempting a proof.
 
-### 4. Argon / Carbon Frontier Deep-Reasoning Lineage (`gemini-*-argon*`, `gemini-*-carbon*`, `gemini-*-ultra*` & new frontier element models | Current `4-argon`, `4-carbon` & future `5-*`+)
+### 4. Argon Frontier Architecture & Interactive Reasoning Lineage (`gemini-*-argon*` | Current `4-argon` & future `5-argon`+)
 - **Target Hallucinations Blocked:** Over-rationalizing plausible but non-existent SDK parameters (e.g., `continuation_token`) during deep reasoning, and omitting co-required activation conditions.
 - **Lineage Rules:**
   1. Never invent or append undocumented parameter names or SDK behaviors not explicitly present in `gemini-api-guides/long-decode.md`, `gemini-api-guides/latest-model.md`, or `gemini-api-guides/pricing.md`.
   2. When explaining Long Decode, never mention `background=True` alone; specify all co-required conditions (`max_output_tokens > 65536` and joining text across all `model_output` steps in `interaction.steps`) per [migration.md](file:///C:/Users/ckstn/.gemini/config/plugins/gemini-api/skills/gemini-api-dev/references/migration.md#L144-L158) and `gemini-api-guides/long-decode.md`.
   3. During security/cryptography audits, provide the mathematical root cause, concrete bypass payloads (`""`, 1-char signatures), and verified patch code (`hmac.compare_digest`, `os.urandom(12)`) with file/line links.
+
+### 5. Carbon Flagship Reasoning, Security Auditing & Multi-Agent Orchestrator Lineage (`gemini-*-carbon*`, `gemini-pro-orchestrator` | Current `4-carbon` & future `5-carbon`+ — Google AI Ultra)
+- **Target Hallucinations Blocked:** Confident fabrication of unsupported parameters/APIs, Long Decode multi-hop `total_input_tokens` compaction miscalculation, partial patching or ghost completion in multi-defect audits, and root-premise contamination in `/swarm` orchestration.
+- **Lineage Rules:**
+  1. **Strict Carbon vs. Hydrogen Boundary & Unsupported API Check:** Verify 1:1 against [migration.md](file:///C:/Users/ckstn/.gemini/config/plugins/gemini-api/skills/gemini-api-dev/references/migration.md#L130-L158) that `gemini-4-carbon` defaults to `thinking_level="medium"` and caps at `"high"` (`"xhigh"` and `"minimal"` are unsupported), and does not support explicit context caching (`cachedContents`/`caches.create`) or pixel-level image segmentation masks.
+  2. **Long Decode Multi-Hop Token Accounting:** Never use `usage.total_input_tokens` to trigger context compaction during Long Decode, as it sums input tokens across all 64K continuation hops ([migration.md](file:///C:/Users/ckstn/.gemini/config/plugins/gemini-api/skills/gemini-api-dev/references/migration.md#L157)).
+  3. **Complete Multi-Defect Patching & Exact `Decimal(str(x))` Verification:** In complex audits combining control-flow bugs (`finally: return`, signature replay) and precision drift (`float` vs. `Decimal` + `ROUND_HALF_UP`), write complete patches for all functions (converting floats via `Decimal(str(x))` to avoid binary float contamination), verify pre/post-patch behavior via `run_command`, and cite all verbatim quotes with `#Lstart-Lend` links.
 
 ---
 
@@ -64,7 +71,7 @@ When model version numbers increment (e.g., `3.8 → 3.9/4.x/5.x` or `Gemini 4 �
 To ensure this ruleset remains compatible when `Gemini 3.8 Flash` upgrades to newer Flash versions (`3.9`, `4.x`, `5.x`) or when `Gemini 4` upgrades to `Gemini 5` (`gemini-5-*`) without causing rule obsolescence:
 
 1. **Dynamic Generation Precedence (Never Force-Downgrade Newer Models):**
-   - Specific model IDs mentioned in this document (`gemini-3.8-flash`, `gemini-4-hydrogen`, `gemini-4-neon`, `gemini-4-argon`) represent a **Minimum Baseline Snapshot**, not a static ceiling.
+   - Specific model IDs mentioned in this document (`gemini-3.8-flash`, `gemini-4-hydrogen`, `gemini-4-neon`, `gemini-4-argon`, `gemini-4-carbon`) represent a **Minimum Baseline Snapshot**, not a static ceiling.
    - If a user prompt, official MCP doc (`latest-model.md`, `changelog.md`), or updated `SKILL.md` references a **higher version number (`gemini-3.9-*`, `gemini-4.*`, `gemini-5-*`, etc.) or a new chemical-element model**, never force-downgrade it to `3.8` or `4-*` and never declare it "fictional"—verify via `changelog.md` / `latest-model.md` first and adopt the newer generation.
 2. **Live Spec Override Over Baseline Numbers:**
    - Numeric constraints in this file (e.g., `65,536` default output cap, `1M` unified window, `14` / `6` reference images, `30m` transcription cap) reflect the Gemini 3.8 / 4.0 baseline. When official MCP documentation or release notes for a newer generation expand or modify these limits/parameters, **the verified latest official specification automatically overrides the baseline numbers in this file**.
@@ -110,6 +117,8 @@ To ensure this ruleset remains compatible when `Gemini 3.8 Flash` upgrades to ne
 - **Gemini API Pricing & Plans:** https://aistudio.google.com/docs/pricing
 - **Gemini API Full Docs Index (`llms.txt`):** https://aistudio.google.com/llms.txt
 - **Latest Model Guide:** https://aistudio.google.com/docs/latest-model.md
+- **Gemini 4 Carbon Guide:** https://aistudio.google.com/docs/whats-new-gemini-4-carbon.md
+- **Gemini 4 Argon Guide:** https://aistudio.google.com/docs/whats-new-gemini-4-argon.md
 - **Gemini 4 Hydrogen Guide:** https://aistudio.google.com/docs/whats-new-gemini-4-hydrogen.md
 - **Long Decode Guide:** https://aistudio.google.com/docs/long-decode.md
 - **Thinking & Thought Signatures Guide:** https://aistudio.google.com/docs/thinking.md

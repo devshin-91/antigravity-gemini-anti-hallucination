@@ -1,11 +1,11 @@
 <div align="center">
 
 # 🛡️ Antigravity Gemini Anti-Hallucination Framework
-### Google Antigravity 기반 Gemini 3.8 Flash 및 Gemini 4 시리즈(Hydrogen · Neon · Argon) 환각 제어 연구 및 실전 가드레일
+### Google Antigravity 기반 Gemini 3.8 Flash 및 Gemini 4 풀 라인업(Hydrogen · Neon · Argon · Carbon) 환각 제어 연구 및 실전 가드레일
 
 [![Platform](https://img.shields.io/badge/Platform-Google%20Antigravity%20(AGY)-4285F4?style=for-the-badge&logo=google)](https://antigravity.google/docs)
 [![Research Partner](https://img.shields.io/badge/Co--Research%20Model-Gemini%204%20Argon%20(High)-8E24AA?style=for-the-badge)](https://aistudio.google.com/docs/latest-model.md)
-[![Target Models](https://img.shields.io/badge/Models-Gemini%203.8%20Flash%20%7C%204%20Hydrogen%20%7C%204%20Neon%20%7C%204%20Argon-0F9D58?style=for-the-badge)](https://aistudio.google.com/docs/pricing)
+[![Target Models](https://img.shields.io/badge/Models-Gemini%203.8%20Flash%20%7C%204%20Hydrogen%20%7C%204%20Neon%20%7C%204%20Argon%20%7C%204%20Carbon-0F9D58?style=for-the-badge)](https://aistudio.google.com/docs/pricing)
 [![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0%20(비영리%20공유%20허용)-F4B400?style=for-the-badge)](./LICENSE)
 [![Repository Visibility](https://img.shields.io/badge/Repository-Private%20Research-333333?style=for-the-badge)]()
 
@@ -16,8 +16,8 @@
 ---
 
 > 📌 **GitHub Sidebar ("About") 설정 문구 (저장소 우측 상단 표시용)**
-> - **Description (About):** `[Antigravity Research] Empirical anti-hallucination guardrails & A/B benchmark suite for Gemini 3.8 Flash and Gemini 4 (Hydrogen, Neon, Argon) on Google Antigravity, co-researched with Gemini 4 Argon (High).`
-> - **Topics (Tags):** `antigravity` `google-antigravity` `gemini-4-argon` `gemini-3-8-flash` `gemini-4-hydrogen` `gemini-4-neon` `anti-hallucination` `llm-grounding` `ab-testing`
+> - **Description (About):** `[Antigravity Research] Empirical anti-hallucination guardrails & A/B benchmark suite for Gemini 3.8 Flash and Gemini 4 (Hydrogen, Neon, Argon, Carbon) on Google Antigravity, co-researched with Gemini 4 Argon (High).`
+> - **Topics (Tags):** `antigravity` `google-antigravity` `gemini-4-argon` `gemini-4-carbon` `gemini-3-8-flash` `gemini-4-hydrogen` `gemini-4-neon` `anti-hallucination` `llm-grounding` `ab-testing`
 
 ---
 
@@ -35,7 +35,7 @@
 1. **가설 수립:** 공식 문서상 `Gemini 3.8 Flash`는 단순 챗봇이 아니라 *"장기 소프트웨어 엔지니어링(long-horizon software engineering), 자율 에이전트(autonomous agents), 복잡한 엔터프라이즈 워크플로우"*에 최적화된 고지능·고효율 모델이다. 즉, **모델 자체의 지능이 부족한 것이 아니라 '도구 확인을 건너뛰는 성급한 추론 습관(환각)'만 시스템적으로 제어하면 극강의 가성비와 속도로 실무에 활용할 수 있다.**
 2. **1차 검증 (Gemini 3.8 Flash A/B 테스트):** **Google Antigravity (AGY)** 환경에서 Gemini 3.8 Flash의 환각을 억제하는 전역 규칙(`GEMINI.md`)을 설계하고, 규칙 적용 전(Condition A)과 적용 후(Condition B)에 대한 통제된 A/B 테스트를 진행했다. 그 결과 **단일 벤치마크에서 `73점 → 100점 (+36.99%)`으로 환각이 100% 제거됨**을 확인했다.
 3. **2차 확장 (8대 정보 종류별 극한 스트레스 테스트):** 일반적인 질문이 아니라 환각이 발생할 수 있는 최대한 다양한 **8가지 정보 도메인(총 24개 세부 항목: 언어 버전 차이, 최신 AI SDK, 멀티모달 제약, 레거시 문서 충돌, 재무/계약 감사, 국제 표준/가짜 논문, 보안 CVE/코드 감사, 유니코드/IEEE-754 정밀 연산)**으로 테스트를 확장했다. 여기서도 **`116/160점 (72.50%) → 160/160점 (100.00%, +37.93%)`**이라는 탁월한 환각 제거 효과를 입증했다.
-4. **3차 일반화 (Google AI Pro 가용 전 모델 맞춤형 확장):** 이 방법론이 Gemini 3.8 Flash에서 완벽히 작동함을 확인한 뒤, 연구를 확장하여 **Google AI Pro 플랜에서 사용 가능한 모든 주력 Gemini 모델(`Gemini 3.8 Flash`, `Gemini 4 Hydrogen`, `Gemini 4 Neon`, `Gemini 4 Argon`)**로 적용 범위를 넓혔다. 각 모델이 가장 잘하는 적합 태스크와 그 태스크에서 발생하는 고유 환각 유형을 규명하고, 모델별 맞춤형 환각 제거 규칙을 수립·검증하여 **범용적인 Antigravity 환각 방지 프레임워크**를 완성했다. *(※ `Gemini 4 Carbon`은 최상위 Ultra 플랜 전용 모델이므로 본 Google AI Pro 플랜 기반 연구 범위에서는 제외함)*
+4. **3차 일반화 (Google AI Pro → Google AI Ultra 5대 전 모델 맞춤형 확장):** 이 방법론이 Gemini 3.8 Flash에서 완벽히 작동함을 확인한 뒤, 연구를 확장하여 초기에는 **Google AI Pro** 플랜 가용 4대 모델(`Gemini 3.8 Flash`, `Gemini 4 Hydrogen`, `Gemini 4 Neon`, `Gemini 4 Argon`)에 적용했고, 이후 **Google AI Ultra** 플랜 업그레이드에 맞춰 최상위 플래그십 모델인 **`Gemini 4 Carbon` (`gemini-4-carbon` 및 `Orchestrator (Carbon)`)**까지 포함한 **5대 전체 모델 계보(Full Roster)**로 고도화했다. 각 모델이 가장 잘하는 적합 태스크와 그 태스크에서 발생하는 고유 환각 유형을 규명하고, 모델별 맞춤형 환각 제거 규칙을 수립·검증하여 **범용적인 Antigravity 환각 방지 프레임워크**를 완성했다.
 5. **4차 미래 호환성 설계 (Phase 4 — 차세대 버전 업 & 신모델 출시 자동 호환 아키텍처):** 향후 `Gemini 3.8 Flash`가 상위 버전(`3.9`, `4.x`, `5.x Flash`)으로 올라가거나 `Gemini 4`가 `Gemini 5`(`gemini-5-*`) 및 신규 원소 코드명으로 세대 교체될 때, 규칙에 적힌 구버전 모델명이 오히려 신버전 사용을 막는 '규칙 노후화(Rule Obsolescence)'를 방지하도록 **① 와일드카드 계보(Lineage Archetype) 승계, ② 상위 세대 자동 우선(강제 다운그레이드 금지), ③ 신규 공식 스펙 동적 오버라이드, ④ 슬라이딩 레거시 차단 윈도우, ⑤ 플러그인 업데이트 대비 동적 라인 번호 재확인 프로토콜**을 설계·적용했다.
 6. **5차 자동화 연구 (Phase 5 — Zero-Prompt · Low-Token 자동 리퍼런스 팩트체크):** 매번 수동으로 리퍼런스 팩트체크를 명령할 때 발생하는 **사용량 낭비**(`morning-waking-paper` 실측 기준 `Step 463~542`에서 **LLM 응답 43회 / 도구 68회** 소모)와 **미명령 시 결함 누락**을 제거하기 위해 **Tier 0–2 계층 오프로딩 엔진(`src/ref_factcheck/`)** 과 **AGY Lifecycle Hook 플러그인(`plugins/ref-fact-checker/`)** 을 구축하고 4대 핵심 축 A/B 비교 실험을 수행했다. 상세 결과는 [Phase 5 연구 보고서](./docs/PHASE5_REFERENCE_FACTCHECK_REPORT.ko.md)를 참조하세요.
 
@@ -55,15 +55,16 @@
 
 ## 2. 핵심 연구 발견: 모델 지능에 따라 환각의 '형태'가 진화한다
 
-**Gemini 4 Argon (High)**와 함께 4대 모델을 대상으로 A/B 테스트를 수행한 결과, 모델의 체급이 올라간다고 해서 환각이 자연 소멸하는 것이 아니라 **모델의 역할에 따라 환각의 양상이 더 교묘하게 진화**한다는 사실을 발견했습니다.
+**Gemini 4 Argon (High)**와 함께 **Google AI Ultra 5대 전 모델**을 대상으로 A/B 테스트를 수행한 결과, 최상위 플래그십 모델(`Gemini 4 Carbon`)조차도 환각과 결함이 자연 소멸하는 것이 아니라 **모델의 역할에 따라 환각의 양상이 더 교묘하게 진화**한다는 사실을 발견했습니다.
 
-| 모델명 (Google AI Pro) | 최적 태스크 (Best-Fit Workload) | 규칙 미적용 시(Condition A) 발생한 고유 환각 패턴 | 맞춤 규칙 적용 시(Condition B) 점수 변화 |
+| 모델명 (Google AI Ultra) | 최적 태스크 (Best-Fit Workload) | 규칙 미적용 시(Condition A) 발생한 고유 환각 패턴 | 맞춤 규칙 적용 시(Condition B) 점수 변화 |
 | :--- | :--- | :--- | :---: |
 | **Gemini 3.8 Flash**<br>(`gemini-3.8-flash`) | 고속 데이터/문서 파이프라인, 빠른 스크립트 작성, 경량 에이전트 | **기억 과신 역환각 (False Negative):** 과거 학습 기억만 믿고 공식 MCP/Skill 조회를 생략하여 최신 실존 모델(`gemini-decision-1` 등)을 "가상 모델"이라 단정하거나 Python 3.13 신규 파라미터(`strict=True`)를 미지원이라 우김 | `73 → 100점`<br>**(`+36.99%`)** |
 | **Gemini 4 Hydrogen**<br>(`gemini-4-hydrogen`) | 일상 인터랙티브 코딩, 고속 배치 실행 엔진, 구현 워커 | **성급한 패치 & 엣지 케이스 누락:** 빠른 실행에 치중해 대소문자 혼용(`Usr-`)·이중 접두사(`USR-usr-`)에 깨지는 코드를 테스트 없이 제출하고, 공식 스키마(`mode.type`) 대신 임의 약칭(`"Smart Dictation"`) 추측 | `75 → 100점`<br>**(`+33.33%`)** |
 | **Gemini 4 Neon**<br>(`gemini-4-neon`) | 멀티파일 리팩토링, 비동기/동시성 디버깅, STEM/알고리즘 추론 | **레거시 혼용 & 필수 식별자 누락:** 현역 모델 목록에 폐기된 `gemini-2.5-*` 모델을 섞어 제시하고, 다형성 설정 객체(`agent_config`)에서 필수 `"type": "antigravity"` 필드를 누락 | `72 → 100점`<br>**(`+38.89%`)** |
 | **Gemini 4 Argon**<br>(`gemini-4-argon`) | 프론티어 아키텍처 설계, 암호학/보안 감사, 1M Long Decode | **심층 추론 과잉 일반화 (Over-Rationalization):** 높은 추론력으로 공식 문서에 존재하지 않는 가상의 SDK 파라미터(`continuation_token`)를 스스로 추론해 덧붙이고 복합 조건(`max_output_tokens > 65536`) 일부를 생략 | `80 → 100점`<br>**(`+25.00%`)** |
-| **4대 모델 종합** | **전 영역 엔지니어링 & 리서치** | **모델별 고유 환각 및 원문/라인 출처 누락 결함 100점 감점** | **`300 → 400점`**<br>**(`+33.33%` / 결함 100% 제거)** |
+| **Gemini 4 Carbon**<br>(`gemini-4-carbon`) | 복합 다중 모듈 루트-코즈 디버깅, 엔터프라이즈 보안·금융 감사, `/swarm` 오케스트레이션 | **복합 감사 부분 패치(유령 완료) & IEEE-754 타이브레이크 오판:** `finally: return` 버그는 찾았으나 중복 노드 서명 재전송(`['SIG-V4-node1']*3`) 방어와 `Decimal(str(x))` 정산 패치 코드를 생략하고, `50.0 * (1.0 - 0.0035)`의 이진 부동소수점 초과 오차(`49.82500000000000284...`) 원리 및 모든 파일/라인 출처 링크를 전면 누락 | `80 → 100점`<br>**(`+25.00%`)** |
+| **5대 모델 종합** | **전 영역 엔지니어링 & 프론티어 리서치** | **모델별 고유 환각, 부분 패치 및 원문/라인 출처 누락 결함 120점 감점** | **`380 → 500점`**<br>**(`+31.58%` / 결함 100% 제거)** |
 
 ---
 

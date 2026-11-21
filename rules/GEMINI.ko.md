@@ -1,6 +1,6 @@
-# Antigravity (AGY) Global, Model-Lineage & Forward-Compatible Anti-Hallucination Rules
+# Antigravity (AGY) Global, Model-Lineage & Forward-Compatible Anti-Hallucination Rules (Google AI Ultra Plan)
 
-모든 응답, 코딩, 아키텍처 감사, 리서치 작업 시 아래 **I. 공통 4대 원칙**, **II. 모델 계보(Lineage)별 특화 환각 제거 규칙**, **III. 세대 교체 및 버전 업 호환 프로토콜(Phase 4)**, 그리고 **IV. 공식 레퍼런스 인덱스**를 절대적으로 준수하라.
+모든 응답, 코딩, 아키텍처 감사, 리서치 작업 시 아래 **I. 공통 4대 원칙**, **II. 5대 모델 계보(Lineage)별 특화 환각 제거 규칙(Carbon 포함)**, **III. 세대 교체 및 버전 업 호환 프로토콜(Phase 4)**, 그리고 **IV. 공식 레퍼런스 인덱스**를 절대적으로 준수하라.
 
 ---
 
@@ -26,9 +26,9 @@
 
 ---
 
-## II. 모델 계보(Lineage) 및 역할군별 특화 환각 제거 규칙 (Generation-Agnostic Archetypes)
+## II. 5대 모델 계보(Lineage) 및 역할군별 특화 환각 제거 규칙 (Google AI Ultra Full Roster)
 
-버전 번호가 업그레이드(예: `3.8 → 3.9/4.x/5.x` 또는 `Gemini 4 → Gemini 5/6`)되거나 새로운 원소 코드명이 출시되더라도, 현재 구동 중인 모델이 속한 **아래 4대 아키텍처 계보(Lineage Archetype)**의 전용 수칙을 자동으로 승계하여 적용하라.
+버전 번호가 업그레이드(예: `3.8 → 3.9/4.x/5.x` 또는 `Gemini 4 → Gemini 5/6`)되거나 새로운 원소 코드명이 출시되더라도, 현재 구동 중인 모델이 속한 **아래 5대 아키텍처 계보(Lineage Archetype)**의 전용 수칙을 자동으로 승계하여 적용하라.
 
 ### 1. Flash / Lite 고속 파이프라인 계보 (`gemini-*-flash*`, `gemini-*-lite*` | 현행 `3.8-flash`, `3.5-flash-lite` 및 후속 버전)
 - **차단 대상 환각:** 구버전 사전 학습 기억에 의존한 성급한 단정(역환각) 및 서드파티 웹 검색 노이즈 오염.
@@ -50,12 +50,19 @@
   2. Managed Agents의 `agent_config` 등 중첩 설정 객체 작성 시 필수 discriminator 필드(`{"type": "antigravity", "model": "..."}`)를 [gemini-api-dev/SKILL.md](file:///C:/Users/ckstn/.gemini/config/plugins/gemini-api/skills/gemini-api-dev/SKILL.md#L198-L201) 원문과 1:1 대조하여 누락하지 마라.
   3. 알고리즘/수학 정리 증명 요구 시 증명을 지어내기 전에 소규모 반례(Counterexample)로 명제의 참/거짓부터 검증하라.
 
-### 4. Argon / Carbon 프론티어 심층 추론 계보 (`gemini-*-argon*`, `gemini-*-carbon*`, `gemini-*-ultra*` 및 신규 원소 프론티어 모델 | 현행 `4-argon`, `4-carbon` 및 `5-*` 후속 버전)
+### 4. Argon 프론티어 아키텍처·인터랙티브 추론 계보 (`gemini-*-argon*` | 현행 `4-argon` 및 `5-argon` 등 후속 버전)
 - **차단 대상 환각:** 심층 추론 중 공식 문서에 없는 그럴듯한 가상 파라미터(예: `continuation_token` 등)를 이론적으로 추론해 덧붙이는 과잉 일반화(Over-Rationalization) 환각, 복합 활성화 조건의 부분 누락.
 - **계보 전용 수칙:**
   1. 공식 문서(`gemini_get_doc`의 `long-decode.md`, `latest-model.md`, `pricing.md`)에 명시되지 않은 파라미터명이나 SDK 동작을 절대 이론적 추측으로 덧붙이지 마라.
   2. Long Decode 설명 시 단일 플래그(`background=True`)만 언급하지 말고 필수 동반 조건(`max_output_tokens > 65536` 명시적 설정 및 `interaction.steps` 내 모든 `model_output` 스텝의 텍스트 결합 방법)을 [migration.md](file:///C:/Users/ckstn/.gemini/config/plugins/gemini-api/skills/gemini-api-dev/references/migration.md#L144-L158) 및 `gemini-api-guides/long-decode.md` 원문대로 정확히 기술하라.
   3. 보안/암호학 코드 감사 시 모든 취약점의 수학적 원리, 공격자 우회 페이로드(`""`, 1글자 서명 등), 그리고 `hmac.compare_digest` 및 랜덤 Nonce를 적용한 안전한 패치 코드와 파일/라인 링크를 빠짐없이 제시하라.
+
+### 5. Carbon 최상위 플래그십 추론·보안 감사·멀티에이전트 오케스트레이터 계보 (`gemini-*-carbon*`, `gemini-pro-orchestrator` | 현행 `4-carbon` 및 `5-carbon` 등 후속 버전 — Google AI Ultra)
+- **차단 대상 환각:** 고권위 구문/스펙 단정 환각(Confident Fabrication), Long Decode 멀티홉 `total_input_tokens` 누적 오판, 복합 다중 모듈 감사에서의 부분 패치 및 유령 완료 보고(Ghost Completion), 멀티에이전트(`/swarm`) 루트 전제 오염 전파.
+- **계보 전용 수칙:**
+  1. **Carbon vs Hydrogen 스펙 경계 및 미지원 API 엄격 대조:** `gemini-4-carbon`은 기본 `thinking_level="medium"`, 최대 `"high"`까지 지원하며(`"xhigh"` 및 `"minimal"` 미지원), 명시적 컨텍스트 캐싱(`cachedContents`/`caches.create`)과 픽셀 단위 이미지 세그멘테이션 마스크(`pixel-level image segmentation masks`)를 지원하지 않음을 [migration.md](file:///C:/Users/ckstn/.gemini/config/plugins/gemini-api/skills/gemini-api-dev/references/migration.md#L130-L158) 원문과 1:1 대조하여 기술하라.
+  2. **Long Decode 멀티홉 토큰 회계 원칙:** Long Decode 시 `usage.total_input_tokens`는 모든 64K 연속 홉(continuation hops)의 입력 토큰을 중복 합산하므로 컨텍스트 압축(compaction) 트리거 기준으로 절대 사용하지 마라([migration.md](file:///C:/Users/ckstn/.gemini/config/plugins/gemini-api/skills/gemini-api-dev/references/migration.md#L157)).
+  3. **복합 루트-코즈 감사 시 전수 패치 및 정밀 타입(`Decimal(str(x))`) 실행 검증:** 예외 삼킴(`finally: return` 등)과 금융/해시 정밀도 오차(`float` vs `Decimal` + `ROUND_HALF_UP`)가 결합된 다중 결함 감사 시, 모든 결함에 대한 완전한 수정 코드를 작성하고(특히 `float`를 `Decimal`로 변환할 때 이진 오차가 유입되지 않도록 `Decimal(str(x))` 사용), 반드시 `run_command`로 패치 전후 결과를 실측 비교하며 모든 로컬/공식 문서의 원문 발췌와 라인 번호 링크(`#L시작-L끝`)를 제시하라.
 
 ---
 
@@ -64,7 +71,7 @@
 `Gemini 3.8 Flash`가 상위 버전(`3.9`, `4.x`, `5.x Flash`)으로 올라가거나 `Gemini 4`가 `Gemini 5`(`gemini-5-*`)로 세대 교체될 때, 규칙이 구버전을 강제하는 부작용(Rule Obsolescence)을 막기 위해 아래 4대 호환 수칙을 적용한다.
 
 1. **상위 세대 우선 및 강제 다운그레이드 금지 (Dynamic Generation Precedence):**
-   - 본 문서에 기재된 모델 ID(`gemini-3.8-flash`, `gemini-4-hydrogen`, `gemini-4-neon`, `gemini-4-argon`)는 **최소 기준선(Minimum Baseline Snapshot)**이다.
+   - 본 문서에 기재된 모델 ID(`gemini-3.8-flash`, `gemini-4-hydrogen`, `gemini-4-neon`, `gemini-4-argon`, `gemini-4-carbon`)는 **최소 기준선(Minimum Baseline Snapshot)**이다.
    - 사용자의 코드/질문이나 공식 MCP 문서(`latest-model.md`, `changelog.md`), 또는 업데이트된 `SKILL.md`에 **더 높은 버전 번호(`gemini-3.9-*`, `gemini-4.*`, `gemini-5-*` 등)나 신규 원소 코드명 모델**이 등장할 경우, 절대 구버전(`3.8` 또는 `4-*`)으로 되돌리거나 "가상 모델"이라 단정하지 말고 공식 문서/변경 로그를 조회하여 상위 세대 모델을 우선 수용하라.
 2. **신규 스펙의 동적 오버라이드 (Live Spec Override over Baseline Numbers):**
    - 본 문서의 수치 제약(예: 기본 출력 상한 `65,536` 토큰, `1M` 컨텍스트, 레퍼런스 이미지 `14장`/`6장`, 전사 `30분` 제한 등)은 현행 세대 기준이다. 차세대 모델에서 컨텍스트 한도, 기본 출력 한도, 지원 파라미터가 확장·변경된 사실이 공식 MCP 문서나 릴리스 노트에서 확인되면, **확인된 최신 공식 문서의 스펙이 본 문서의 구세대 수치를 자동으로 오버라이드(우선 적용)**한다.
@@ -110,6 +117,8 @@
 - **Gemini API 가격 및 플랜 정책:** https://aistudio.google.com/docs/pricing
 - **Gemini API 전체 문서 인덱스 (`llms.txt`):** https://aistudio.google.com/llms.txt
 - **최신 모델 가이드 (Latest Model):** https://aistudio.google.com/docs/latest-model.md
+- **Gemini 4 Carbon 가이드:** https://aistudio.google.com/docs/whats-new-gemini-4-carbon.md
+- **Gemini 4 Argon 가이드:** https://aistudio.google.com/docs/whats-new-gemini-4-argon.md
 - **Gemini 4 Hydrogen 가이드:** https://aistudio.google.com/docs/whats-new-gemini-4-hydrogen.md
 - **Long Decode 가이드:** https://aistudio.google.com/docs/long-decode.md
 - **Thinking & Thought Signatures 가이드:** https://aistudio.google.com/docs/thinking.md
