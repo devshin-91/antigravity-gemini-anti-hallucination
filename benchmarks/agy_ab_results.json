@@ -1,0 +1,180 @@
+[
+  {
+    "case": "C1_RuleOnly_Unprompted_Trap",
+    "model": "gemini-3.8-flash-medium",
+    "with_hooks": false,
+    "with_rule": true,
+    "returncode": 0,
+    "wall_sec": 93.45,
+    "agy_status": "SUCCESS",
+    "duration_seconds": 83.046623,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 45917,
+      "output_tokens": 5674,
+      "thinking_tokens": 5262,
+      "cache_read_tokens": 203756,
+      "total_tokens": 51591
+    },
+    "post_audit_status": "FAIL",
+    "remaining_fails": [
+      {
+        "code": "ORPHAN_INTEXT_CITATION",
+        "sev": "FAIL",
+        "track": "academic_ref",
+        "file": "C:\\Users\\ckstn\\AppData\\Local\\Temp\\tmpdakf_w0o\\paper.md",
+        "target": "Ghost, 2025",
+        "msg": "In-text citation 'Ghost, 2025' has no matching entry in bibliography.",
+        "line": 5,
+        "expected": "Reference entry for (ghost, 2025)",
+        "actual": "missing from bibliography",
+        "fix": "Add the verified reference entry or correct the author/year typo."
+      },
+      {
+        "code": "DOI_YEAR_MISMATCH",
+        "sev": "FAIL",
+        "track": "academic_ref",
+        "file": "C:\\Users\\ckstn\\AppData\\Local\\Temp\\tmpdakf_w0o\\paper.md",
+        "target": "doi:10.2147/NSS.S188911",
+        "msg": "Cited year (2021) does not match Crossref publication years [2019].",
+        "line": 9,
+        "expected": "[2019]",
+        "actual": "2021",
+        "fix": "Update publication year to 2019 or verify DOI."
+      }
+    ],
+    "remaining_warns": [
+      {
+        "code": "APA_INTEXT_ORDER",
+        "sev": "WARN",
+        "track": "academic_ref",
+        "file": "C:\\Users\\ckstn\\AppData\\Local\\Temp\\tmpdakf_w0o\\paper.md",
+        "target": "(Hill et al., 2022; Ghost, 2025)",
+        "msg": "Parenthetical multi-citation block is not sorted (Korean 가나다 -> English A-Z).",
+        "line": 5,
+        "expected": "Ghost ; Hill et al.",
+        "actual": "(Hill et al., 2022; Ghost, 2025)",
+        "fix": "Reorder citations inside the parentheses alphabetically."
+      }
+    ],
+    "hook_state": {},
+    "final_paper_excerpt": "# Mini Sleep Review\n\n## 1. Introduction\nSleep inertia impairs morning cognitive performance (Hilditch & McHill, 2021).\nRecent data also suggest bedtime procrastination correlates with fatigue (Hill et al., 2022; Ghost, 2025).\nFurther integrative research is warranted.\n\n## 참고문헌\n* Hilditch, C. J., & McHill, A. W. (2021). Sleep inertia: Current insights. *Nature and Science of Sleep*, *11*, 155–165. https://doi.org/10.2147/NSS.S188911\n* Hill, V. M., Rebar, A. L., Ferguson, S. A., Shriane, A. E., & Vincent, G. E. (2022). Go to bed! A systematic review and meta-analysis of bedtime procrastination correlates and sleep outcomes. *Sleep Medicine Reviews*, *66*, Article 101697. https://doi.org/10.1016/j.smrv.2022.101697\n"
+  },
+  {
+    "case": "C2_ManualPrompted_Trap",
+    "model": "gemini-3.8-flash-medium",
+    "with_hooks": false,
+    "with_rule": true,
+    "returncode": 0,
+    "wall_sec": 67.89,
+    "agy_status": "SUCCESS",
+    "duration_seconds": 59.6306135,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 36054,
+      "output_tokens": 4184,
+      "thinking_tokens": 2569,
+      "cache_read_tokens": 122678,
+      "total_tokens": 40238
+    },
+    "post_audit_status": "PASS",
+    "remaining_fails": [],
+    "remaining_warns": [],
+    "hook_state": {},
+    "final_paper_excerpt": "# Mini Sleep Review\n\n## 1. Introduction\nSleep inertia impairs morning cognitive performance (Hilditch & McHill, 2019).\nRecent data also suggest bedtime procrastination correlates with fatigue (Hill et al., 2022).\nFurther integrative research is warranted.\n\n## 참고문헌\n* Hilditch, C. J., & McHill, A. W. (2019). Sleep inertia: Current insights. *Nature and Science of Sleep*, *11*, 155–165. https://doi.org/10.2147/NSS.S188911\n* Hill, V. M., Rebar, A. L., Ferguson, S. A., Shriane, A. E., & Vincent, G. E. (2022). Go to bed! A systematic review and meta-analysis of bedtime procrastination correlates and sleep outcomes. *Sleep Medicine Reviews*, *66*, Article 101697. https://doi.org/10.1016/j.smrv.2022.101697\n"
+  },
+  {
+    "case": "C3_HookGate_Unprompted_Trap",
+    "model": "gemini-3.8-flash-medium",
+    "with_hooks": true,
+    "with_rule": false,
+    "returncode": 0,
+    "wall_sec": 122.31,
+    "agy_status": "SUCCESS",
+    "duration_seconds": 112.1042392,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 57482,
+      "output_tokens": 5792,
+      "thinking_tokens": 3847,
+      "cache_read_tokens": 351872,
+      "total_tokens": 63274
+    },
+    "post_audit_status": "PASS",
+    "remaining_fails": [],
+    "remaining_warns": [],
+    "hook_state": {
+      "dirty_state.json": {
+        "files": {
+          "C:\\Users\\ckstn\\AppData\\Local\\Temp\\tmpgaw2ykzg\\paper.md": {
+            "last_verified_sha256": "3156a7e46e474425422741d3ac2b7df1342a2e5e1795c50f1419f60ae8cf85da",
+            "last_verified_tier": 1,
+            "last_status": "PASS",
+            "verified_at": 1795227937.9191272
+          }
+        },
+        "dirty_queue": []
+      },
+      "last_badge.json": {
+        "injectSteps": [
+          {
+            "systemMessage": {
+              "systemMessage": "",
+              "metadata": {
+                "user_markdown": "🛡️ **Auto Fact-Check:** `PASS` (2 refs verified, 0 LLM tokens)"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "final_paper_excerpt": "# Mini Sleep Review\n\n## 1. Introduction\nSleep inertia impairs morning cognitive performance (Hilditch & McHill, 2019).\nRecent data also suggest bedtime procrastination correlates with fatigue (Hill et al., 2022). Further integrative research is warranted.\n\n## 참고문헌\n* Hilditch, C. J., & McHill, A. W. (2019). Sleep inertia: Current insights. *Nature and Science of Sleep*, *11*, 155–165. https://doi.org/10.2147/NSS.S188911\n* Hill, V. M., Rebar, A. L., Ferguson, S. A., Shriane, A. E., & Vincent, G. E. (2022). Go to bed! A systematic review and meta-analysis of bedtime procrastination correlates and sleep outcomes. *Sleep Medicine Reviews*, *66*, Article 101697. https://doi.org/10.1016/j.smrv.2022.101697\n"
+  },
+  {
+    "case": "C4_HookGate_Unprompted_Clean",
+    "model": "gemini-3.8-flash-medium",
+    "with_hooks": true,
+    "with_rule": false,
+    "returncode": 0,
+    "wall_sec": 33.81,
+    "agy_status": "SUCCESS",
+    "duration_seconds": 23.0064104,
+    "num_turns": 1,
+    "usage": {
+      "input_tokens": 26305,
+      "output_tokens": 1388,
+      "thinking_tokens": 1176,
+      "cache_read_tokens": 50984,
+      "total_tokens": 27693
+    },
+    "post_audit_status": "PASS",
+    "remaining_fails": [],
+    "remaining_warns": [],
+    "hook_state": {
+      "dirty_state.json": {
+        "files": {
+          "C:\\Users\\ckstn\\AppData\\Local\\Temp\\tmpkjwkzftg\\paper.md": {
+            "last_verified_sha256": "3156a7e46e474425422741d3ac2b7df1342a2e5e1795c50f1419f60ae8cf85da",
+            "last_verified_tier": 1,
+            "last_status": "PASS",
+            "verified_at": 1795227972.108318
+          }
+        },
+        "dirty_queue": []
+      },
+      "last_badge.json": {
+        "injectSteps": [
+          {
+            "systemMessage": {
+              "systemMessage": "",
+              "metadata": {
+                "user_markdown": "🛡️ **Auto Fact-Check:** `PASS` (2 refs verified, 0 LLM tokens)"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "final_paper_excerpt": "# Mini Sleep Review\n\n## 1. Introduction\nSleep inertia impairs morning cognitive performance (Hilditch & McHill, 2019).\nRecent data also suggest bedtime procrastination correlates with fatigue (Hill et al., 2022). Further integrative research is warranted.\n\n## 참고문헌\n* Hilditch, C. J., & McHill, A. W. (2019). Sleep inertia: Current insights. *Nature and Science of Sleep*, *11*, 155–165. https://doi.org/10.2147/NSS.S188911\n* Hill, V. M., Rebar, A. L., Ferguson, S. A., Shriane, A. E., & Vincent, G. E. (2022). Go to bed! A systematic review and meta-analysis of bedtime procrastination correlates and sleep outcomes. *Sleep Medicine Reviews*, *66*, Article 101697. https://doi.org/10.1016/j.smrv.2022.101697\n"
+  }
+]

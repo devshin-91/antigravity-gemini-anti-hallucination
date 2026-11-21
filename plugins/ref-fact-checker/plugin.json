@@ -1,0 +1,15 @@
+{
+  "name": "ref-fact-checker",
+  "displayName": "Zero-Prompt Reference Fact-Checker",
+  "version": "2.0.0",
+  "description": "Automatic zero-prompt & low-token reference fact-checking gate for local file/line citations and academic DOI/APA references.",
+  "author": {
+    "name": "Chansu Shin (@devshin-91) & Google Antigravity",
+    "url": "https://github.com/devshin-91/antigravity-gemini-anti-hallucination"
+  },
+  "suggestedPrompts": [
+    "Fact-check all references and line links in this project",
+    "Extract minimal PDF evidence snippets for numeric claims in my paper draft",
+    "Run Tier 0-2 reference benchmark on current workspace"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "ref-fact-checker": {
+    "PostToolUse": [
+      {
+        "matcher": "write_file|edit_file",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python ./hooks/hook_runner.py PostToolUse",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreInvocation": [
+      {
+        "type": "command",
+        "command": "python ./hooks/hook_runner.py PreInvocation",
+        "timeout": 10
+      }
+    ],
+    "Stop": [
+      {
+        "type": "command",
+        "command": "python ./hooks/hook_runner.py Stop",
+        "timeout": 25
+      }
+    ]
+  }
+}

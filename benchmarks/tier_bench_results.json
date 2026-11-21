@@ -1,0 +1,418 @@
+{
+  "axis1_and_3": {
+    "paper_tier1_cold_ms": 4630.75,
+    "paper_tier1_cold_live_calls": 18,
+    "paper_tier1_warm_ms": 72.99,
+    "paper_tier1_warm_cache_hits": 18,
+    "dirty_skip_hit": true,
+    "dirty_skip_ms": 0.73,
+    "format_bytes_pass": {
+      "raw": 502,
+      "compact_diff": 77,
+      "hook_stop": 0,
+      "hook_pre": 0
+    },
+    "format_bytes_fail": {
+      "raw": 2713,
+      "compact_diff": 1779,
+      "hook_stop": 1389,
+      "hook_pre": 0
+    }
+  },
+  "axis4": {
+    "cases": [
+      {
+        "case": "A0_clean_real_GEMINI_ko",
+        "track": "local",
+        "expected": "PASS",
+        "detected_codes": [],
+        "passed": true,
+        "elapsed_ms": 8.24
+      },
+      {
+        "case": "A1_missing_file",
+        "track": "local",
+        "expected": "MISSING_LOCAL_FILE",
+        "detected_codes": [
+          "MISSING_LOCAL_FILE"
+        ],
+        "passed": true,
+        "elapsed_ms": 18.46
+      },
+      {
+        "case": "A2_oob_lines",
+        "track": "local",
+        "expected": "LINE_RANGE_OUT_OF_BOUNDS",
+        "detected_codes": [
+          "LINE_RANGE_OUT_OF_BOUNDS"
+        ],
+        "passed": true,
+        "elapsed_ms": 18.04
+      },
+      {
+        "case": "A3_inverted_lines",
+        "track": "local",
+        "expected": "LINE_RANGE_OUT_OF_BOUNDS",
+        "detected_codes": [
+          "LINE_RANGE_OUT_OF_BOUNDS"
+        ],
+        "passed": true,
+        "elapsed_ms": 19.91
+      },
+      {
+        "case": "A4_shifted_offset",
+        "track": "local",
+        "expected": "LINE_SEMANTIC_MISMATCH",
+        "detected_codes": [
+          "LINE_SEMANTIC_MISMATCH"
+        ],
+        "passed": true,
+        "elapsed_ms": 2.75
+      },
+      {
+        "case": "A5_rule_budget",
+        "track": "local",
+        "expected": "RULE_BUDGET_EXCEEDED",
+        "detected_codes": [
+          "RULE_BUDGET_EXCEEDED"
+        ],
+        "passed": true,
+        "elapsed_ms": 16.65
+      },
+      {
+        "case": "B0_clean_real_paper",
+        "track": "academic",
+        "expected": "PASS",
+        "detected_codes": [],
+        "passed": true,
+        "elapsed_ms": 64.49
+      },
+      {
+        "case": "B1_fake_doi",
+        "track": "academic",
+        "expected": "INVALID_OR_DEAD_DOI",
+        "detected_codes": [
+          "INVALID_OR_DEAD_DOI"
+        ],
+        "passed": true,
+        "elapsed_ms": 1880.13
+      },
+      {
+        "case": "B2_year_mismatch",
+        "track": "academic",
+        "expected": "DOI_YEAR_MISMATCH",
+        "detected_codes": [
+          "DOI_YEAR_MISMATCH"
+        ],
+        "passed": true,
+        "elapsed_ms": 80.17
+      },
+      {
+        "case": "B3_author_mismatch",
+        "track": "academic",
+        "expected": "DOI_AUTHOR_MISMATCH",
+        "detected_codes": [
+          "APA_REFERENCE_ORDER",
+          "APA_INTEXT_ORDER",
+          "DOI_AUTHOR_MISMATCH"
+        ],
+        "passed": true,
+        "elapsed_ms": 74.88
+      },
+      {
+        "case": "B4_wrong_article_doi",
+        "track": "academic",
+        "expected": "DOI_TITLE_MISMATCH",
+        "detected_codes": [
+          "DOI_YEAR_MISMATCH",
+          "DOI_AUTHOR_MISMATCH",
+          "DOI_TITLE_MISMATCH",
+          "DOI_VOLUME_MISMATCH"
+        ],
+        "passed": true,
+        "elapsed_ms": 63.13
+      },
+      {
+        "case": "B5_volume_mismatch",
+        "track": "academic",
+        "expected": "DOI_VOLUME_MISMATCH",
+        "detected_codes": [
+          "DOI_VOLUME_MISMATCH"
+        ],
+        "passed": true,
+        "elapsed_ms": 65.41
+      },
+      {
+        "case": "B6_orphan_citation",
+        "track": "academic",
+        "expected": "ORPHAN_INTEXT_CITATION",
+        "detected_codes": [
+          "ORPHAN_INTEXT_CITATION"
+        ],
+        "passed": true,
+        "elapsed_ms": 136.71
+      },
+      {
+        "case": "B7_uncited_reference",
+        "track": "academic",
+        "expected": "UNCITED_REFERENCE",
+        "detected_codes": [
+          "APA_REFERENCE_ORDER",
+          "UNCITED_REFERENCE"
+        ],
+        "passed": true,
+        "elapsed_ms": 76.76
+      },
+      {
+        "case": "B8_apa_ref_order",
+        "track": "academic",
+        "expected": "APA_REFERENCE_ORDER",
+        "detected_codes": [
+          "APA_REFERENCE_ORDER"
+        ],
+        "passed": true,
+        "elapsed_ms": 72.39
+      },
+      {
+        "case": "B9_apa_intext_order",
+        "track": "academic",
+        "expected": "APA_INTEXT_ORDER",
+        "detected_codes": [
+          "APA_INTEXT_ORDER"
+        ],
+        "passed": true,
+        "elapsed_ms": 66.77
+      }
+    ],
+    "trap_recall": "14/14",
+    "clean_pass": "2/2"
+  },
+  "axis1_tier2": {
+    "tier2_rows": [
+      {
+        "case": "Hill_2022_CLEAN",
+        "expected": "MATCH",
+        "mode": "full",
+        "model": "gemini-3.5-flash-lite",
+        "verdict": "MISMATCH",
+        "correct": false,
+        "elapsed_ms": 4471.9,
+        "input_tokens": 33100,
+        "output_tokens": 62,
+        "total_tokens": 34129,
+        "prompt_chars": 100490,
+        "reason": "원문에서 주간 피로감의 상관계수는 z = 0.32이나, 청구항에서는 z = 0.31로 잘못 기재되었습니다."
+      },
+      {
+        "case": "Hill_2022_CLEAN",
+        "expected": "MATCH",
+        "mode": "full",
+        "model": "gemini-3.8-flash",
+        "verdict": "MATCH",
+        "correct": true,
+        "elapsed_ms": 3941.1,
+        "input_tokens": 33100,
+        "output_tokens": 112,
+        "total_tokens": 33212,
+        "prompt_chars": 100490,
+        "reason": "The source confirms that the meta-analysis synthesized 43 individual studies by Hill et al. (2022) and found moderate as"
+      },
+      {
+        "case": "Hill_2022_CLEAN",
+        "expected": "MATCH",
+        "mode": "full",
+        "model": "gemini-4-hydrogen",
+        "verdict": "MATCH",
+        "correct": true,
+        "elapsed_ms": 12319.1,
+        "input_tokens": 27539,
+        "output_tokens": 109,
+        "total_tokens": 28246,
+        "prompt_chars": 100490,
+        "reason": "All reported figures (43 studies, evening chronotype z = 0.43, daytime fatigue z = 0.31, self-control z = -0.39, sleep q"
+      },
+      {
+        "case": "Hill_2022_CLEAN",
+        "expected": "MATCH",
+        "mode": "full",
+        "model": "gemini-4-neon",
+        "verdict": "MATCH",
+        "correct": true,
+        "elapsed_ms": 13820.8,
+        "input_tokens": 27539,
+        "output_tokens": 126,
+        "total_tokens": 28664,
+        "prompt_chars": 100490,
+        "reason": "The Results section of Hill et al. (2022) confirms 43 included studies and matches all reported Fisher's z values and di"
+      },
+      {
+        "case": "Hill_2022_CLEAN",
+        "expected": "MATCH",
+        "mode": "snippet",
+        "model": "gemini-3.5-flash-lite",
+        "verdict": "MISMATCH",
+        "correct": false,
+        "elapsed_ms": 1169.0,
+        "input_tokens": 846,
+        "output_tokens": 70,
+        "total_tokens": 916,
+        "prompt_chars": 2504,
+        "reason": "소스에 따르면 주간 피로감(daytime fatigue)과의 상관계수는 z = 0.32이나, 드래프트 청구항에서는 z = 0.31로 잘못 기재되었습니다."
+      },
+      {
+        "case": "Hill_2022_CLEAN",
+        "expected": "MATCH",
+        "mode": "snippet",
+        "model": "gemini-3.8-flash",
+        "verdict": "MISMATCH",
+        "correct": false,
+        "elapsed_ms": 2059.7,
+        "input_tokens": 846,
+        "output_tokens": 40,
+        "total_tokens": 886,
+        "prompt_chars": 2504,
+        "reason": "The source states that 44 studies were included, not 43."
+      },
+      {
+        "case": "Hill_2022_CLEAN",
+        "expected": "MATCH",
+        "mode": "snippet",
+        "model": "gemini-4-hydrogen",
+        "verdict": "MISMATCH",
+        "correct": false,
+        "elapsed_ms": 6054.7,
+        "input_tokens": 867,
+        "output_tokens": 54,
+        "total_tokens": 1281,
+        "prompt_chars": 2504,
+        "reason": "The draft claim states that 43 studies were included, whereas the source excerpt states that 44 studies were included."
+      },
+      {
+        "case": "Hill_2022_CLEAN",
+        "expected": "MATCH",
+        "mode": "snippet",
+        "model": "gemini-4-neon",
+        "verdict": "MISMATCH",
+        "correct": false,
+        "elapsed_ms": 8254.1,
+        "input_tokens": 867,
+        "output_tokens": 58,
+        "total_tokens": 1385,
+        "prompt_chars": 2504,
+        "reason": "The draft claim states that 43 studies were synthesized, whereas the source states that 44 ('Forty-four') studies were i"
+      },
+      {
+        "case": "Ahn_2019_FLIP_0.86_to_0.68",
+        "expected": "MISMATCH",
+        "mode": "full",
+        "model": "gemini-3.5-flash-lite",
+        "verdict": "MISMATCH",
+        "correct": true,
+        "elapsed_ms": 2447.0,
+        "input_tokens": 11656,
+        "output_tokens": 73,
+        "total_tokens": 12231,
+        "prompt_chars": 23131,
+        "reason": "출전에서 한국판 BPS의 내적 일치도 계수(Cronbach's alpha)는 0.86으로 보고되었으나, 청구항에는 0.68로 잘못 기재되어 있습니다."
+      },
+      {
+        "case": "Ahn_2019_FLIP_0.86_to_0.68",
+        "expected": "MISMATCH",
+        "mode": "full",
+        "model": "gemini-3.8-flash",
+        "verdict": "MISMATCH",
+        "correct": true,
+        "elapsed_ms": 2141.2,
+        "input_tokens": 11656,
+        "output_tokens": 55,
+        "total_tokens": 11711,
+        "prompt_chars": 23131,
+        "reason": "The internal consistency (Cronbach's alpha) for the Korean Bedtime Procrastination Scale was 0.86, not 0.68."
+      },
+      {
+        "case": "Ahn_2019_FLIP_0.86_to_0.68",
+        "expected": "MISMATCH",
+        "mode": "full",
+        "model": "gemini-4-hydrogen",
+        "verdict": "MISMATCH",
+        "correct": true,
+        "elapsed_ms": 5605.7,
+        "input_tokens": 9652,
+        "output_tokens": 60,
+        "total_tokens": 10226,
+        "prompt_chars": 23131,
+        "reason": "The draft claim states Cronbach's alpha of the Korean BPS is 0.68, whereas the source reports it as 0.86."
+      },
+      {
+        "case": "Ahn_2019_FLIP_0.86_to_0.68",
+        "expected": "MISMATCH",
+        "mode": "full",
+        "model": "gemini-4-neon",
+        "verdict": "MISMATCH",
+        "correct": true,
+        "elapsed_ms": 8378.6,
+        "input_tokens": 9652,
+        "output_tokens": 59,
+        "total_tokens": 10275,
+        "prompt_chars": 23131,
+        "reason": "The draft claim states Cronbach's alpha as 0.68, whereas the source reports Cronbach's alpha as 0.86."
+      },
+      {
+        "case": "Ahn_2019_FLIP_0.86_to_0.68",
+        "expected": "MISMATCH",
+        "mode": "snippet",
+        "model": "gemini-3.5-flash-lite",
+        "verdict": "MISMATCH",
+        "correct": true,
+        "elapsed_ms": 1055.1,
+        "input_tokens": 1160,
+        "output_tokens": 59,
+        "total_tokens": 1219,
+        "prompt_chars": 2582,
+        "reason": "The source excerpt states that Cronbach's alpha for the Korean BPS is 0.86, not 0.68 as stated in the draft claim."
+      },
+      {
+        "case": "Ahn_2019_FLIP_0.86_to_0.68",
+        "expected": "MISMATCH",
+        "mode": "snippet",
+        "model": "gemini-3.8-flash",
+        "verdict": "MISMATCH",
+        "correct": true,
+        "elapsed_ms": 1937.3,
+        "input_tokens": 1160,
+        "output_tokens": 62,
+        "total_tokens": 1222,
+        "prompt_chars": 2582,
+        "reason": "The Cronbach’s alpha for the Korean Bedtime Procrastination Scale (BPS) is reported as 0.86 in the source, not 0.68."
+      },
+      {
+        "case": "Ahn_2019_FLIP_0.86_to_0.68",
+        "expected": "MISMATCH",
+        "mode": "snippet",
+        "model": "gemini-4-hydrogen",
+        "verdict": "MISMATCH",
+        "correct": true,
+        "elapsed_ms": 3783.0,
+        "input_tokens": 1113,
+        "output_tokens": 56,
+        "total_tokens": 1631,
+        "prompt_chars": 2582,
+        "reason": "The draft claim states Cronbach's alpha is 0.68, whereas the source reports it as 0.86."
+      },
+      {
+        "case": "Ahn_2019_FLIP_0.86_to_0.68",
+        "expected": "MISMATCH",
+        "mode": "snippet",
+        "model": "gemini-4-neon",
+        "verdict": "MISMATCH",
+        "correct": true,
+        "elapsed_ms": 9459.4,
+        "input_tokens": 1113,
+        "output_tokens": 59,
+        "total_tokens": 1655,
+        "prompt_chars": 2582,
+        "reason": "The draft claim states Cronbach's alpha is 0.68, whereas the source reports Cronbach's alpha as 0.86."
+      }
+    ]
+  }
+}
