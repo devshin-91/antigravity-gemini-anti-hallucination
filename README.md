@@ -36,6 +36,19 @@ By cross-referencing the official **[Gemini Developer API Pricing & Model Specif
 3. **Phase 2 (8-Category Information Stress Test):** Rather than testing only simple cases, we expanded the benchmark across **8 distinct information domains (24 sub-tasks: language version deltas, bleeding-edge AI SDKs, multimodal constraints, legacy vs. production doc conflicts, financial/contract audits, RFC standards & fake academic papers, cybersecurity CVEs & code audits, and Unicode/IEEE-754 precision computation)**. Condition B achieved **`160/160 (100.00%)` vs. Condition A's `116/160 (72.50%)` (`+37.93%` improvement)**.
 4. **Phase 3 (Generalization Across All Google AI Pro Models):** Having proven the methodology on Gemini 3.8 Flash, we expanded the framework to every core Gemini model available under the **Google AI Pro** subscription plan inside Antigravity: **`Gemini 3.8 Flash`**, **`Gemini 4 Hydrogen`**, **`Gemini 4 Neon`**, and **`Gemini 4 Argon`**. *(Note: `Gemini 4 Carbon` is excluded both because it is reserved for the Google AI Ultra plan and because it serves as the top-end heavyweight model).*
 5. **Phase 4 (Forward-Compatibility & Next-Generation Upgrade Architecture):** To guarantee that our global rules remain compatible when `Gemini 3.8 Flash` upgrades to higher versions (`3.9`, `4.x`, `5.x Flash`) or when `Gemini 4` transitions to `Gemini 5` (`gemini-5-*`) and new chemical-element models without causing rule obsolescence, we engineered a **Generation-Agnostic Forward-Compatibility Protocol** featuring: (1) Wildcard Model-Lineage Archetypes (`gemini-*-flash*`, `gemini-*-hydrogen*`, `gemini-*-neon*`, `gemini-*-argon*`), (2) Dynamic Generation Precedence (never force-downgrading newer generations), (3) Live Official Spec Override over baseline numbers, (4) Sliding Deprecation Windows, and (5) Dynamic Line-Number Re-Verification across plugin updates.
+6. **Phase 5 (Zero-Prompt, Low-Token Automated Reference Fact-Checking):** Manual fact-checking prompts incur high token/step overhead (`43 LLM responses / 68 tool calls` observed in `morning-waking-paper` steps `463–542`), while unprompted edits miss errors. We engineered a **Tier 0–2 Verification Engine (`src/ref_factcheck/`)** and an **AGY Lifecycle Hook Plugin (`plugins/ref-fact-checker/`)** and evaluated them across a 4-axis benchmark ([Phase 5 Research Report](./docs/PHASE5_REFERENCE_FACTCHECK_REPORT.en.md)).
+
+---
+
+## 2-1. Phase 5 Highlights: Eliminating Omissions & Unnecessary Token Spend
+
+| Metric / Evaluation Axis | Baseline (Rules / Manual) | Phase 5 (`ref-fact-checker`) | Measured Gain |
+| :--- | :---: | :---: | :--- |
+| **Unprompted Trap Detection** (`agy -p`) | `Rule Only (C1)`: `2 FAIL / 1 WARN` **missed** (`83.05s`, `51,591 tok`) | `Hook Gate (C3)`: **Auto-fixed to `PASS`** (`0 fails`, `0 warns`) | **100% → 0% omission rate** |
+| **Clean Edit Overhead** (`agy -p`) | `Rule Only (C1)`: `83.05s` · `51,591 tok` | `Hook Gate Clean (C4)`: **`23.01s` · `27,693 tok`** (`0` extra turns) | **`-72.3%` latency · `-46.3%` tokens** |
+| **21-Ref / 18-DOI Verification Speed** | Ad-hoc LLM scripts | Cold `4,630.8ms` → Warm SQLite `72.99ms` → Dirty-Skip **`0.73ms`** | **`63.4x` cached · `6,343x` dirty-skip (`0` LLM tok)** |
+| **16-Case Stress Test** (Track A + B) | Rule-file-only checker | **14/14 traps caught (`100%`), 2/2 clean (`0%` FP)** | **Full local link + academic DOI/APA coverage** |
+| **Tier 2 PDF Slicing (`Snippet` vs `Full`)** | Full PDF context ingestion | `Ahn 2019` flip trap: `11,656 → 1,160` input tok (**`4/4` models 100%**) | **`-90%` input tokens (`1–2s`) + Cascade fallback** |
 
 ---
 
@@ -57,18 +70,32 @@ Through controlled A/B experiments evaluated by **Gemini 4 Argon (High)**, we di
 
 ```text
 antigravity-gemini-anti-hallucination/
-├── README.md                        # [English] Main documentation & Quickstart
-├── README.ko.md                     # [한국어] Korean Main documentation & Quickstart
-├── CONTRIBUTORS.md                  # Role breakdown between Human PI and AI Partner (Antigravity · Gemini 4 Argon High)
-├── LICENSE                          # CC BY-NC 4.0 (Non-Commercial Shareable License)
+├── README.md                                  # [English] Main documentation & Quickstart
+├── README.ko.md                               # [한국어] Korean Main documentation & Quickstart
+├── CONTRIBUTORS.md                            # Role breakdown between Human PI and AI Partners (Argon High · Hydrogen XHigh)
+├── LICENSE                                    # CC BY-NC 4.0 (Non-Commercial Shareable License)
 ├── rules/
-│   ├── GEMINI.ko.md                 # [한국어] Production GEMINI.md rules (Global + Model-Specific)
-│   └── GEMINI.en.md                 # [English] Production GEMINI.md rules (Global + Model-Specific)
+│   ├── GEMINI.ko.md                           # [한국어] Production GEMINI.md rules (Global + Model-Specific)
+│   └── GEMINI.en.md                           # [English] Production GEMINI.md rules (Global + Model-Specific)
 ├── docs/
-│   ├── RESEARCH_REPORT.ko.md        # [한국어] Detailed A/B Test & Fact-Check Research Report
-│   └── RESEARCH_REPORT.en.md        # [English] Detailed A/B Test & Fact-Check Research Report
+│   ├── RESEARCH_REPORT.ko.md                  # [한국어] Phase 1–4 A/B Test & Fact-Check Research Report
+│   ├── RESEARCH_REPORT.en.md                  # [English] Phase 1–4 A/B Test & Fact-Check Research Report
+│   ├── PHASE5_REFERENCE_FACTCHECK_REPORT.ko.md # [한국어] Phase 5 Zero-Prompt Fact-Check 4-Axis Report
+│   └── PHASE5_REFERENCE_FACTCHECK_REPORT.en.md # [English] Phase 5 Zero-Prompt Fact-Check 4-Axis Report
+├── src/
+│   └── ref_factcheck/                         # Tier 0–2 verification engine (offline, SQLite WAL cache, Poppler PDF slicer, CLI)
+├── plugins/
+│   └── ref-fact-checker/                      # Native Antigravity plugin bundle (hooks.json + hook_runner.py + SKILL.md + AGENTS.md)
+├── benchmarks/
+│   ├── run_tier_bench.py                      # Axes 1, 3, 4 benchmarks (16 traps, cache, format sizes, Tier 2 4-model eval)
+│   ├── run_agy_ab_bench.py                    # Axis 2 live agy -p 3-way A/B benchmark
+│   ├── tier_bench_results.json                # Measured Axes 1, 3, 4 results
+│   └── agy_ab_results.json                    # Measured Axis 2 results
+├── tests/
+│   └── test_ref_factcheck.py                  # Unit & subprocess hook integration tests
 └── scripts/
-    └── fact_check_references.py     # Automated verifier for file paths, line ranges, and semantic keywords
+    ├── fact_check_references.py               # Automated verifier for file paths, line ranges, and semantic keywords
+    └── install_plugin.py                      # Self-contained installer to ~/.gemini/config/plugins/ref-fact-checker
 ```
 
 ---
@@ -89,6 +116,21 @@ Copy-Item .\rules\GEMINI.ko.md "$HOME\.gemini\config\GEMINI.md" -Force
 cp ./rules/GEMINI.en.md ~/.gemini/config/GEMINI.md
 ```
 
+### Step 2. Install the Phase 5 Zero-Prompt Fact-Checker Plugin (Global AGY Automation)
+To enforce automatic verification on markdown/rule edits without manual prompts (and zero extra tokens on clean edits), run the installer from the repository root. It bundles `src/ref_factcheck/` into a self-contained plugin and pins your active Python interpreter path inside `~/.gemini/config/plugins/ref-fact-checker/hooks.json`:
+
+```bash
+# Windows / macOS / Linux (Python 3.10+)
+python ./scripts/install_plugin.py
+```
+
+* **Standalone CLI Usage:**
+  ```bash
+  PYTHONPATH=src python -m ref_factcheck check path/to/paper.md --tier 1 --format compact_diff
+  ```
+* **Tier 2 PDF Evidence Slicing (Optional):** Requires Poppler (`pdftotext`) and `google-genai` (`python -m ref_factcheck evidence paper.md --refs-dir references/`).
+* **Disable / Uninstall:** Toggle off in the Antigravity Customizations UI (`ref-fact-checker`) or remove `~/.gemini/config/plugins/ref-fact-checker`.
+
 ---
 
 ## 5. Contributors
@@ -96,7 +138,9 @@ cp ./rules/GEMINI.en.md ~/.gemini/config/GEMINI.md
 See [CONTRIBUTORS.md](./CONTRIBUTORS.md) for the complete division of roles:
 
 * **Principal Investigator & Research Lead — Chansu Shin (`@devshin-91` / `devshin91@gmail.com`)**: Problem definition, empirical observation of Gemini 3.8 Flash grounding behavior, official pricing/task hypothesis formulation (`aistudio.google.com/docs/pricing`), multi-stage A/B experimental design across information categories and Google AI Pro models, and licensing policy.
-* **AI Co-Researcher, Benchmark Architect & Evaluator (`Google Antigravity` — `Gemini 4 Argon High`)**: Literature & API documentation synthesis, 2-tier `GEMINI.md` guardrail engineering, multi-domain & model-tailored trap codebase construction, AGY Native Swarm A/B execution, quantitative rubric grading, and automated reference fact-checking.
+* **AI Co-Researcher, Benchmark Architect & Evaluator (`Google Antigravity` — [`@antigravity-bot`](https://github.com/antigravity-bot))**:
+  - **Phase 1–4 (`Gemini 4 Argon High`):** Literature & API documentation synthesis, 2-tier `GEMINI.md` guardrail engineering, trap codebase construction, AGY Native Swarm A/B execution, quantitative rubric grading, and initial reference fact-checking.
+  - **Phase 5 (`Gemini 4 Hydrogen XHigh`):** Baseline session profiling, live AGY `hooks.json` runtime probing, Tier 0–2 `ref_factcheck` engine & `plugins/ref-fact-checker` implementation, 16-case trap stress testing, live `agy -p` 3-way A/B evaluation, and 4-model Tier 2 PDF comparison.
 
 ---
 

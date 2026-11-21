@@ -37,6 +37,19 @@
 3. **2차 확장 (8대 정보 종류별 극한 스트레스 테스트):** 일반적인 질문이 아니라 환각이 발생할 수 있는 최대한 다양한 **8가지 정보 도메인(총 24개 세부 항목: 언어 버전 차이, 최신 AI SDK, 멀티모달 제약, 레거시 문서 충돌, 재무/계약 감사, 국제 표준/가짜 논문, 보안 CVE/코드 감사, 유니코드/IEEE-754 정밀 연산)**으로 테스트를 확장했다. 여기서도 **`116/160점 (72.50%) → 160/160점 (100.00%, +37.93%)`**이라는 탁월한 환각 제거 효과를 입증했다.
 4. **3차 일반화 (Google AI Pro 가용 전 모델 맞춤형 확장):** 이 방법론이 Gemini 3.8 Flash에서 완벽히 작동함을 확인한 뒤, 연구를 확장하여 **Google AI Pro 플랜에서 사용 가능한 모든 주력 Gemini 모델(`Gemini 3.8 Flash`, `Gemini 4 Hydrogen`, `Gemini 4 Neon`, `Gemini 4 Argon`)**로 적용 범위를 넓혔다. 각 모델이 가장 잘하는 적합 태스크와 그 태스크에서 발생하는 고유 환각 유형을 규명하고, 모델별 맞춤형 환각 제거 규칙을 수립·검증하여 **범용적인 Antigravity 환각 방지 프레임워크**를 완성했다. *(※ `Gemini 4 Carbon`은 최상위 Ultra 플랜 전용 모델이므로 본 Google AI Pro 플랜 기반 연구 범위에서는 제외함)*
 5. **4차 미래 호환성 설계 (Phase 4 — 차세대 버전 업 & 신모델 출시 자동 호환 아키텍처):** 향후 `Gemini 3.8 Flash`가 상위 버전(`3.9`, `4.x`, `5.x Flash`)으로 올라가거나 `Gemini 4`가 `Gemini 5`(`gemini-5-*`) 및 신규 원소 코드명으로 세대 교체될 때, 규칙에 적힌 구버전 모델명이 오히려 신버전 사용을 막는 '규칙 노후화(Rule Obsolescence)'를 방지하도록 **① 와일드카드 계보(Lineage Archetype) 승계, ② 상위 세대 자동 우선(강제 다운그레이드 금지), ③ 신규 공식 스펙 동적 오버라이드, ④ 슬라이딩 레거시 차단 윈도우, ⑤ 플러그인 업데이트 대비 동적 라인 번호 재확인 프로토콜**을 설계·적용했다.
+6. **5차 자동화 연구 (Phase 5 — Zero-Prompt · Low-Token 자동 리퍼런스 팩트체크):** 매번 수동으로 리퍼런스 팩트체크를 명령할 때 발생하는 **사용량 낭비**(`morning-waking-paper` 실측 기준 `Step 463~542`에서 **LLM 응답 43회 / 도구 68회** 소모)와 **미명령 시 결함 누락**을 제거하기 위해 **Tier 0–2 계층 오프로딩 엔진(`src/ref_factcheck/`)** 과 **AGY Lifecycle Hook 플러그인(`plugins/ref-fact-checker/`)** 을 구축하고 4대 핵심 축 A/B 비교 실험을 수행했다. 상세 결과는 [Phase 5 연구 보고서](./docs/PHASE5_REFERENCE_FACTCHECK_REPORT.ko.md)를 참조하세요.
+
+---
+
+## 2-1. Phase 5 핵심 발견: "규칙만으로는 무명령 누락을 못 막고, 훅 게이트는 PASS 시 0바이트로 통과한다"
+
+| 실험 지표 / 비교 대상 | 기존 수동·규칙 방식 | Phase 5 자동화 (`ref-fact-checker`) | 실측 개선 효과 |
+| :--- | :---: | :---: | :--- |
+| **무명령 편집 시 결함 적발** (`agy -p` A/B) | `Rule Only (C1)`: `FAIL 2 / WARN 1` **전부 누락** (`83.05s`, `51,591 tok`) | `Hook Gate (C3)`: **자동 적발 및 교정 `PASS`** (`0 fails`, `0 warns`) | **무명령 누락률 100% → 0% 제거** |
+| **정상 파일 편집 시 오버헤드** (`agy -p`) | `Rule Only (C1)`: `83.05s` · `51,591 tok` | `Hook Gate Clean (C4)`: **`23.01s` · `27,693 tok`** (추가 LLM 턴 `0`회) | **시간 `-72.3%` · 토큰 `-46.3%`** |
+| **DOI/서지 21편 검증 속도** (21편 / 18 DOI) | 매번 LLM 스크립트 작성·실행 | Tier 1 Cold `4,630.8ms` → Warm SQLite `72.99ms` → Dirty-Skip **`0.73ms`** | **캐시 `63.4x` · 스킵 `6,343x` 가속 (`0` LLM 토큰)** |
+| **16케이스 함정 스트레스 테스트** (Track A+B) | 수동 스크립트(단일 규칙 파일 전용) | **14/14 함정 적발 (`100%`), 2/2 정상 통과 (`0%` 오탐)** | **로컬 라인·문맥 + 학술 DOI·APA 전수 커버** |
+| **Tier 2 PDF 수치 대조 (`Snippet` vs `Full`)** | PDF 전문 읽기로 대량 토큰 소모 | `Ahn 2019` 변조 적발 시 입력 토큰 `11,656 → 1,160` (**`4/4` 모델 100% 정확**) | **입력 토큰 `-90%` (`1~2초` 컷) + 불일치 건만 Cascade** |
 
 ---
 
@@ -60,18 +73,32 @@
 
 ```text
 antigravity-gemini-anti-hallucination/
-├── README.md                        # [English] Main documentation & Quickstart
-├── README.ko.md                     # [한국어] 메인 연구 개요 및 빠른 시작 가이드
-├── CONTRIBUTORS.md                  # 연구자(Human PI) 및 AI 협조 모델(Antigravity · Gemini 4 Argon High) 역할 명세
-├── LICENSE                          # CC BY-NC 4.0 (비영리 공유 허용 / 상업적 이용 금지 라이선스)
+├── README.md                                  # [English] Main documentation & Quickstart
+├── README.ko.md                               # [한국어] 메인 연구 개요 및 빠른 시작 가이드
+├── CONTRIBUTORS.md                            # 연구자(Human PI) 및 AI 협조 모델(Argon High · Hydrogen XHigh) 역할 명세
+├── LICENSE                                    # CC BY-NC 4.0 (비영리 공유 허용 / 상업적 이용 금지 라이선스)
 ├── rules/
-│   ├── GEMINI.ko.md                 # [한국어] Antigravity 전역 & 모델별 환각 방지 규칙 (배포용)
-│   └── GEMINI.en.md                 # [English] Antigravity Global & Model-Specific Anti-Hallucination Rules
+│   ├── GEMINI.ko.md                           # [한국어] Antigravity 전역 & 모델별 환각 방지 규칙 (배포용)
+│   └── GEMINI.en.md                           # [English] Antigravity Global & Model-Specific Anti-Hallucination Rules
 ├── docs/
-│   ├── RESEARCH_REPORT.ko.md        # [한국어] 8대 정보 카테고리 & 4대 모델 A/B 테스트 전체 실험 보고서
-│   └── RESEARCH_REPORT.en.md        # [English] Full Empirical A/B Benchmark & Fact-Check Report
+│   ├── RESEARCH_REPORT.ko.md                  # [한국어] Phase 1–4 8대 카테고리 & 4대 모델 A/B 실험 보고서
+│   ├── RESEARCH_REPORT.en.md                  # [English] Phase 1–4 Full Empirical A/B Benchmark Report
+│   ├── PHASE5_REFERENCE_FACTCHECK_REPORT.ko.md # [한국어] Phase 5 Zero-Prompt 자동 팩트체크 4대 축 비교 보고서
+│   └── PHASE5_REFERENCE_FACTCHECK_REPORT.en.md # [English] Phase 5 Zero-Prompt Fact-Check Architecture & Benchmark Report
+├── src/
+│   └── ref_factcheck/                         # Tier 0–2 통합 검증 엔진 (오프라인·SQLite WAL 캐시·Poppler PDF 스니펫·CLI)
+├── plugins/
+│   └── ref-fact-checker/                      # Antigravity 네이티브 플러그인 (hooks.json + hook_runner.py + SKILL.md + AGENTS.md)
+├── benchmarks/
+│   ├── run_tier_bench.py                      # 축 1·3·4 정량 벤치마크 (16케이스 함정·캐시·포맷·Tier 2 4모델 비교)
+│   ├── run_agy_ab_bench.py                    # 축 2 실전 agy -p 3-Way A/B 벤치마크
+│   ├── tier_bench_results.json                # 축 1·3·4 실측 JSON 데이터
+│   └── agy_ab_results.json                    # 축 2 실측 JSON 데이터
+├── tests/
+│   └── test_ref_factcheck.py                  # 단위·서브프로세스 통합 회귀 테스트
 └── scripts/
-    └── fact_check_references.py     # 레퍼런스 경로·라인 번호·키워드 무결성 자동 팩트 체크 스크립트
+    ├── fact_check_references.py               # 레퍼런스 경로·라인 번호·키워드 자동 팩트 체크 스크립트
+    └── install_plugin.py                      # ~/.gemini/config/plugins/ref-fact-checker 일괄 설치 스크립트
 ```
 
 ---
@@ -91,7 +118,23 @@ Copy-Item .\rules\GEMINI.ko.md "$HOME\.gemini\config\GEMINI.md" -Force
 cp ./rules/GEMINI.ko.md ~/.gemini/config/GEMINI.md
 ```
 
-### Step 2. AGY 채팅창 슬래시 커맨드 & 멘션 조합
+### Step 2. Phase 5 Zero-Prompt 자동 팩트체크 플러그인 설치 (전역 AGY 자동 적용)
+매번 `"참고문헌 팩트체크해줘"`를 입력하지 않고도 문서 편집 시 자동으로 `file:///#L`·DOI·1:1 인용을 검사하려면 `ref-fact-checker` 플러그인을 전역 설치합니다. 설치 스크립트가 `src/ref_factcheck/` 엔진을 번들링하고 현재 Python 인터프리터 경로를 `hooks.json`에 고정해 `~/.gemini/config/plugins/ref-fact-checker`로 복사합니다:
+
+```powershell
+# Windows / macOS / Linux 공통 (저장소 루트에서 실행, Python 3.10+)
+python ./scripts/install_plugin.py
+```
+
+* **CLI 단독 실행 (플러그인 없이 수동 검증 시):**
+  ```powershell
+  $env:PYTHONPATH="src"   # macOS/Linux: export PYTHONPATH=src
+  python -m ref_factcheck check path/to/paper.md --tier 1 --format compact_diff
+  ```
+* **Tier 2 PDF 수치 대조 (선택):** `pdftotext` (Poppler) 및 `google-genai` 패키지 설치 시 `python -m ref_factcheck evidence paper.md --refs-dir references/` 실행 가능.
+* **비활성화 / 제거:** Antigravity Customizations UI(`ref-fact-checker`)에서 토글하거나 `~/.gemini/config/plugins/ref-fact-checker` 폴더를 삭제하세요.
+
+### Step 3. AGY 채팅창 슬래시 커맨드 & 멘션 조합
 * **`@` 멘션 (`@파일`, `@폴더`, `@MCP`)**: 질문 전에 근거 데이터를 컨텍스트 최상단에 고정(Context-First)합니다.
 * **`/boost`**: 다각도 추론과 엄격한 교차 검증(Rigorous Verification)이 필요한 고난도 코딩/리서치 시 활성화합니다.
 * **`/grill-me`**: 에이전트가 모호한 요구사항을 멋대로 추측(Assumption Hallucination)하지 못하도록 사전 인터뷰를 강제합니다.
@@ -106,7 +149,7 @@ cp ./rules/GEMINI.ko.md ~/.gemini/config/GEMINI.md
 | 역할 (Role) | 기여자 (Contributor) | 주요 기여 내용 (Key Contributions) |
 | :--- | :--- | :--- |
 | **Principal Investigator & Research Lead**<br>*(연구 총괄 · 문제 정의 · 가설 및 실험 설계)* | **Chansu Shin (`@devshin-91` / `devshin91@gmail.com`)** | • Gemini 3.8 Flash 실사용 환각 문제 정의 및 외부 검색 그라운딩 시의 효용성 발견<br>• 공식 가격/모델 문서(`aistudio.google.com/docs/pricing`) 기반 모델별 최적 태스크 매핑 가설 수립<br>• 3단계 연구 확장 설계 (3.8 Flash A/B 테스트 → 8대 정보 유형별 테스트 → Google AI Pro 가용 4대 모델 맞춤 규칙 및 A/B 테스트)<br>• 레퍼런스 무결성 팩트 체크 기준 및 비영리 공유 라이선스 정책 수립 |
-| **AI Co-Researcher, Benchmark Architect & Evaluator**<br>*(기술 리서치 · 규칙 아키텍처 · Swarm 실험 및 채점)* | **Google Antigravity**<br>*(Model: **Gemini 4 Argon High**)* | • Gemini 3.x/4.x API 패러다임 변화(`temperature` 폐기, `thinking_level`, `Thought Signatures`, `Long Decode`) 문헌 조사<br>• AGY 2계층(`공통 4대 원칙` + `모델별 특화 프로파일`) `GEMINI.md` 환각 제거 규칙 설계<br>• 8대 정보 카테고리 및 4대 모델 전용 함정 코드베이스 구축 및 AGY Native Swarm 기반 통제 A/B 실험 수행<br>• 400점 만점 정량 루브릭 채점 및 Python 자동화 스크립트 기반 31개 레퍼런스 100% 팩트 체크 수행 |
+| **AI Co-Researcher, Benchmark Architect & Evaluator**<br>*(기술 리서치 · 규칙/플러그인 아키텍처 · Swarm & A/B 실측)* | **Google Antigravity** ([`@antigravity-bot`](https://github.com/antigravity-bot))<br>*(Phase 1–4: **Gemini 4 Argon High** · Phase 5: **Gemini 4 Hydrogen XHigh**)* | • **Phase 1–4 (`Argon High`):** Gemini 3.x/4.x API 패러다임 변화 문헌 조사, 2계층 `GEMINI.md` 규칙 설계, Swarm 통제 A/B 실험 및 400점 루브릭 채점<br>• **Phase 5 (`Hydrogen XHigh`):** 실사용 토큰 베이스라인 분석, AGY Hook 런타임 프로브, Tier 0–2 `ref_factcheck` 엔진·`plugins/ref-fact-checker` 구현, 16케이스 스트레스 테스트 및 라이브 `agy -p` 3-Way A/B 비교 실험 수행 |
 
 ---
 
