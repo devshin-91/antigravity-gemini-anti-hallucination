@@ -133,20 +133,32 @@ python ./scripts/install_plugin.py
 
 ---
 
-## 5. Contributors
+## 5. Limitations & Human Final Responsibility
+
+* **Technical & Algorithmic Boundaries:**
+  * **Chunk-Boundary Context Blindness:** As observed in the `Hill 2022` benchmark, when a single paper reports dual figures across distant sections (`44` qualitative studies / `z=0.32` on p.3 vs. `43` meta-analyzed studies / `z=0.31` on p.35), localized snippets and lightweight models can emit false-positive `MISMATCH` flags unless escalated to the full source.
+  * **Non-DOI & Semantic Coverage Limits:** Deterministic Tier 0–1 checks verify `file:///#L...` bounds, DOI metadata, 1:1 citation mapping, and APA ordering—they do **not** validate **non-DOI sources** (press releases, books), **overstated causal interpretations** of accurate numbers, or **un-OCR'd scanned PDFs**.
+  * **Bounded Retry Guard (`max_continuations=2`):** The `Stop` hook limits automatic continuation loops to 2 retries per turn to avoid runaway token usage.
+* **AI Fallibility & Human Co-Responsibility / Final Sign-Off:**
+  * Automated hooks and LLMs are **risk-reduction guardrails**, not infallible oracles—**AI can still make mistakes, overlook context, or introduce faulty edits.**
+  * Anyone working alongside AI is both a **co-responsible collaborator (Co-Owner)** and the **final accountable authority (Final Sign-Off)** for academic publication, production release, or external decisions. **Final human verification of primary sources and conclusions remains mandatory.**
+
+---
+
+## 6. Contributors
 
 See [CONTRIBUTORS.md](./CONTRIBUTORS.md) for the complete division of roles:
 
-* **Principal Investigator & Research Lead — Chansu Shin (`@devshin-91` / `devshin91@gmail.com`)**: Problem definition, empirical observation of Gemini 3.8 Flash grounding behavior, official pricing/task hypothesis formulation (`aistudio.google.com/docs/pricing`), multi-stage A/B experimental design across information categories and Google AI Pro models, and licensing policy.
+* **Principal Investigator & Research Lead — Chansu Shin (`@devshin-91` / `devshin91@gmail.com`)**: Problem definition, empirical observation of Gemini 3.8 Flash grounding behavior, official pricing/task hypothesis formulation (`aistudio.google.com/docs/pricing`), 5-phase experimental design (including Zero-Prompt Phase 5 and Human-in-the-Loop governance), and licensing policy.
 * **AI Co-Researcher, Benchmark Architect & Evaluator (`Google Antigravity` — [`@antigravity-bot`](https://github.com/antigravity-bot))**:
   - **Phase 1–4 (`Gemini 4 Argon High`):** Literature & API documentation synthesis, 2-tier `GEMINI.md` guardrail engineering, trap codebase construction, AGY Native Swarm A/B execution, quantitative rubric grading, and initial reference fact-checking.
   - **Phase 5 (`Gemini 4 Hydrogen XHigh`):** Baseline session profiling, live AGY `hooks.json` runtime probing, Tier 0–2 `ref_factcheck` engine & `plugins/ref-fact-checker` implementation, 16-case trap stress testing, live `agy -p` 3-way A/B evaluation, and 4-model Tier 2 PDF comparison.
 
 ---
 
-## 6. License (CC BY-NC 4.0)
+## 7. License (CC BY-NC 4.0)
 
 This project is licensed under the **Creative Commons Attribution-NonCommercial 4.0 International License ([CC BY-NC 4.0](./LICENSE))**.
 * **Share & Adapt:** You may freely copy, share, and adapt this work for personal, academic, or non-commercial research use.
-* **Attribution Required:** You must give appropriate credit to the author and the co-research platform/model (**Google Antigravity** & **Gemini 4 Argon High**).
+* **Attribution Required:** You must give appropriate credit to the author and the co-research platform/models (**Google Antigravity** · **Gemini 4 Argon High** · **Gemini 4 Hydrogen XHigh**).
 * **Non-Commercial Only:** Commercial use, resale, or bundling into paid commercial products/courses is strictly prohibited.

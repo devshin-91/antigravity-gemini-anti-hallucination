@@ -105,3 +105,24 @@ Executed on an isolated Git workspace editing `paper.md` seeded with 2 errors (`
 Across 2 real clean baselines (`GEMINI.ko.md` with 19 `file:///` links and `step4_full_draft.md` with 21 references / 86 in-text citations) plus 14 injected failure traps ([run_tier_bench.py](../benchmarks/run_tier_bench.py)):
 * **Trap Detection Recall:** **`14 / 14` (`100.0%`)** (`A1–A5` local/budget traps in `2.75–19.91 ms`; `B1–B9` DOI/citation/APA traps in `63.13–1,880.13 ms`).
 * **Clean False Positive Rate:** **`0 / 2` (`0.0%`)**.
+
+---
+
+## 5. Production Recommendation
+
+1. **Always-On Tier 0–1 Baseline:** Enable `plugins/ref-fact-checker` globally (`PostToolUse` + `Stop` + `PreInvocation` + SQLite WAL cache) to eliminate omission risk with zero extra LLM turns on clean edits.
+2. **Keep `GEMINI.md` Lean:** Offload procedural reference verification to deterministic hooks and CLI tools rather than bloating the 24KB instruction budget.
+3. **Cascade Tier 2 Only Before Final Submission:** Run `python -m ref_factcheck evidence` (`Snippet + gemini-3.8-flash` first, escalating only `MISMATCH` cases to `Full PDF`) during pre-submission numerical audits.
+
+---
+
+## 6. Limitations & Human Final Responsibility
+
+1. **Chunk-Boundary Context Blindness:** As demonstrated in the `Hill 2022` Tier 2 evaluation, when a single paper contains conflicting or dual-reported numbers across distant sections (`44` qualitative studies / `z = 0.32` on p.3 vs. `43` meta-analyzed studies / `z = 0.31` on p.35), localized snippets or lightweight models can emit false-positive `MISMATCH` alerts or miss subtle contextual distinctions.
+2. **Coverage Boundaries (Non-DOI, Semantic Distortion & PDF Extraction):**
+   * Deterministic Tier 0–1 checks verify file/line bounds, 1:1 citation mapping, APA order, and Crossref/DOI metadata—they do **not** guarantee semantic fidelity of **non-DOI sources** (press releases, books, conference abstracts) or catch **valid statistics framed with exaggerated causal claims**.
+   * Scanned image PDFs without an OCR text layer, complex multi-column tables, and non-standard font encodings can lose digits or signs during Poppler `pdftotext` extraction.
+3. **Bounded `Stop`-Hook Continuation Guard (`max_continuations=2`):** To prevent infinite loops and runaway token spend, the `Stop` hook caps automated retries per turn. Complex failures left unresolved after the retry budget require manual resolution.
+4. **AI Fallibility & Human Co-Responsibility / Final Accountability:**
+   * Even with deterministic guardrails and cascading LLM checks, **AI agents remain probabilistic systems capable of mistakes, misinterpretations, and faulty edits.**
+   * Any human collaborating with AI acts as both a **co-responsible partner (Co-Owner)** in the workflow and the **final accountable authority (Final Sign-Off)** for academic publication, code release, or production deployment. A hook `PASS` never substitutes for **direct human final review** of primary sources, figures, and conclusions prior to release.

@@ -142,21 +142,33 @@ python ./scripts/install_plugin.py
 
 ---
 
-## 5. Contributors (연구 기여자 및 역할 분담)
+## 5. 한계점 및 인간 최종 책임 원칙 (Limitations & Human Final Review)
 
-본 연구는 인간 연구자의 문제 정의·가설 수립·실험 설계와 **Google Antigravity** 상에서 구동된 **Gemini 4 Argon (High)**의 에이전틱 실행·검증·채점 협업을 통해 완성되었습니다. 상세 내역은 [CONTRIBUTORS.md](./CONTRIBUTORS.md)를 참조하세요.
+* **기술적·알고리즘적 한계:**
+  * **문맥 경계 불일치 (`Chunk-Boundary Blindness`):** `Hill 2022` 실험처럼 단일 논문 내부에 이원 표기(예: `p.3` 정성 고찰 `44편`·`z=0.32` vs 본문 메타분석 `43편`·`p.35` `z=0.31`)가 존재하면, 부분 스니펫과 경량 모델이 오탐(`MISMATCH`)할 수 있어 원문 전체 교차 확인이 필요합니다.
+  * **비-DOI·의미론적 왜곡 미검출:** Tier 0–1 엔진은 `file:///#L`, DOI 메타데이터, 1:1 인용 매핑만 검증하므로 **DOI 없는 보도자료·단행본 내용**이나 **수치는 맞지만 해석을 과장한 서술**, **OCR 미적용 스캔 PDF**는 자동으로 완전히 검증하지 못합니다.
+  * **재시도 상한 (`max_continuations=2`):** 무한 루프 방지를 위해 `Stop` 훅의 자동 수정 루프는 턴당 최대 2회로 제한됩니다.
+* **AI 오류 가능성과 인간의 공동·최종 책임:**
+  * AI와 자동 팩트체커는 오류를 줄이는 **보조 안전장치**일 뿐, AI 역시 확률적 모델로서 언제든 실수를 할 수 있습니다.
+  * AI와 함께 작업하는 인간 연구자·개발자는 산출물의 **공동 책임자(Co-Owner)** 이자 외부 공개·제출·배포에 대한 **최종 책임자(Final Accountable Authority)** 이므로, 자동 검증 `PASS` 여부와 무관하게 **최종 검토(Human Final Review)는 반드시 인간이 직접 수행해야 합니다.**
+
+---
+
+## 6. Contributors (연구 기여자 및 역할 분담)
+
+본 연구는 인간 연구자의 문제 정의·가설 수립·실험 설계와 **Google Antigravity** 상에서 구동된 AI 모델(**Gemini 4 Argon High** · **Gemini 4 Hydrogen XHigh**)의 에이전틱 실행·검증·채점 협업을 통해 완성되었습니다. 상세 내역은 [CONTRIBUTORS.md](./CONTRIBUTORS.md)를 참조하세요.
 
 | 역할 (Role) | 기여자 (Contributor) | 주요 기여 내용 (Key Contributions) |
 | :--- | :--- | :--- |
-| **Principal Investigator & Research Lead**<br>*(연구 총괄 · 문제 정의 · 가설 및 실험 설계)* | **Chansu Shin (`@devshin-91` / `devshin91@gmail.com`)** | • Gemini 3.8 Flash 실사용 환각 문제 정의 및 외부 검색 그라운딩 시의 효용성 발견<br>• 공식 가격/모델 문서(`aistudio.google.com/docs/pricing`) 기반 모델별 최적 태스크 매핑 가설 수립<br>• 3단계 연구 확장 설계 (3.8 Flash A/B 테스트 → 8대 정보 유형별 테스트 → Google AI Pro 가용 4대 모델 맞춤 규칙 및 A/B 테스트)<br>• 레퍼런스 무결성 팩트 체크 기준 및 비영리 공유 라이선스 정책 수립 |
+| **Principal Investigator & Research Lead**<br>*(연구 총괄 · 문제 정의 · 가설 및 실험 설계)* | **Chansu Shin (`@devshin-91` / `devshin91@gmail.com`)** | • Gemini 3.8 Flash 실사용 환각 문제 정의 및 외부 검색 그라운딩 시의 효용성 발견<br>• 공식 가격/모델 문서(`aistudio.google.com/docs/pricing`) 기반 모델별 최적 태스크 매핑 가설 수립<br>• 5단계 연구 확장 설계 (3.8 Flash → 8대 정보 유형 → 4대 모델 → Phase 4 세대 호환 → Phase 5 Zero-Prompt 자동화 4대 축)<br>• 레퍼런스 무결성 기준, 인간 최종 책임 원칙 및 비영리 공유 라이선스 정책 수립 |
 | **AI Co-Researcher, Benchmark Architect & Evaluator**<br>*(기술 리서치 · 규칙/플러그인 아키텍처 · Swarm & A/B 실측)* | **Google Antigravity** ([`@antigravity-bot`](https://github.com/antigravity-bot))<br>*(Phase 1–4: **Gemini 4 Argon High** · Phase 5: **Gemini 4 Hydrogen XHigh**)* | • **Phase 1–4 (`Argon High`):** Gemini 3.x/4.x API 패러다임 변화 문헌 조사, 2계층 `GEMINI.md` 규칙 설계, Swarm 통제 A/B 실험 및 400점 루브릭 채점<br>• **Phase 5 (`Hydrogen XHigh`):** 실사용 토큰 베이스라인 분석, AGY Hook 런타임 프로브, Tier 0–2 `ref_factcheck` 엔진·`plugins/ref-fact-checker` 구현, 16케이스 스트레스 테스트 및 라이브 `agy -p` 3-Way A/B 비교 실험 수행 |
 
 ---
 
-## 6. 라이선스 (License — CC BY-NC 4.0)
+## 7. 라이선스 (License — CC BY-NC 4.0)
 
 본 저장소의 모든 규칙(`GEMINI.md`), 연구 보고서, 벤치마크 설계 및 스크립트는 **Creative Commons Attribution-NonCommercial 4.0 International ([CC BY-NC 4.0](./LICENSE))** 라이선스 하에 배포됩니다.
 
 * ✅ **공유 및 수정 허용 (Share & Adapt):** 연구, 개인 개발, 사내 비영리 학습 목적으로 자유롭게 복제, 배포, 수정할 수 있습니다.
-* ⚠️ **출처 표시 필수 (Attribution):** 공유 또는 인용 시 원 저작자 및 연구 플랫폼/협조 모델(**Google Antigravity** & **Gemini 4 Argon High**)을 명시해야 합니다.
+* ⚠️ **출처 표시 필수 (Attribution):** 공유 또는 인용 시 원 저작자 및 연구 플랫폼/협조 모델(**Google Antigravity** · **Gemini 4 Argon High** · **Gemini 4 Hydrogen XHigh**)을 명시해야 합니다.
 * 🚫 **상업적 이용 불가 (Non-Commercial):** 본 저장소의 결과물을 유료 강의, 유료 플러그인/SaaS 판매 등 상업적·영리적 목적으로 사용하는 것을 엄격히 금지합니다.
